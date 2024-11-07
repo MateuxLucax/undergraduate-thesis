@@ -1,191 +1,90 @@
-
 %\chapter{Introdução}
 
+\chapter{Introdução}
 
-\chapter{Seção Primária}
+Este Trabalho de Conclusão de Curso (TCC) aborda o desenvolvimento de uma extensão Flutter que visa auxiliar os desenvolvedores no processo de criação de aplicações móveis acessíveis em Flutter. A motivação para este trabalho surge da crescente importância da inclusão e da acessibilidade no desenvolvimento de aplicações móveis, bem como da necessidade de simplificar e melhorar o processo de desenvolvimento de soluções acessíveis utilizando tecnologias modernas, como o Flutter.
 
-A introdução apresenta os objetivos do trabalho, bem como as razões de sua elaboração. Tem caráter didático de apresentação.
+O TCC foi desenvolvido seguindo uma metodologia baseada nas fases fundamentais da Engenharia de Software, incluindo análise (Engenharia de Requisitos), projeto, programação, testes e validação. Além disso, a execução do trabalho foi gerenciada utilizando a metodologia ágil, garantindo um desenvolvimento iterativo e incremental do projeto.
 
-Deve abordar:
-\begin{enumerate}[noitemsep,nosep,labelindent=\parindent,leftmargin=*,label={\alph*}) ] 
-	\item o problema de pesquisa, proposto de forma clara e objetiva;
-	\item os objetivos, delimitando o que se pretende fazer;
-	\item a justificativa, destacando a importância do estudo;
-	\item apresentar as definições e conceitos necessários para a compreensão do estudo;
-	\item apresentar a forma como está estruturado o trabalho e o que contém cada uma de suas partes.
-\end{enumerate}
+A introdução detalha o contexto, a problemática, os objetivos geral e específicos, a justificativa e a metodologia adotada no desenvolvimento do trabalho. Em seguida, o TCC é organizado em capítulos que abordam a revisão da literatura, o projeto e a implementação da extensão, os testes e a validação realizados com desenvolvedores e PCDs, e o gerenciamento do projeto. Por fim, as conclusões discutem os principais resultados, limitações e possíveis trabalhos futuros relacionados ao tema da acessibilidade em aplicações móveis.
 
-O desenvolvimento é a demonstração lógica de todo o trabalho, detalha a pesquisa ou o estudo realizado. Explica, discute e demonstra a pertinência das teorias utilizadas na exposição e resolução do problema. 
+\section{Problema}
 
-O desenvolvimento pode ser subdivido em seções e subseções com nomenclaturas definidas pelo autor conforme conteúdo apresentado. 
+A acessibilidade tem se tornado cada vez mais relevante no contexto do desenvolvimento de aplicações móveis, uma vez que possibilita a inclusão e a igualdade de oportunidades para pessoas com deficiência (PCDs). As aplicações móveis têm desempenhado um papel essencial no cotidiano das pessoas, e é imprescindível que elas sejam projetadas de forma inclusiva, garantindo uma experiência eficiente e satisfatória para todos os usuários. Neste cenário, o presente TCC se aplica ao desenvolvimento de aplicações móveis acessíveis utilizando o framework Flutter, que tem sido amplamente adotado devido à sua capacidade de criar aplicativos de alta qualidade e com desempenho otimizado para múltiplas plataforma. Contudo, o desenvolvimento de aplicações móveis acessíveis em Flutter ainda enfrenta desafios relacionados à complexidade e à necessidade de conhecimento especializado.
 
-Regras de apresentação da Capa
+O problema abordado neste TCC é a dificuldade enfrentada pelos desenvolvedores ao implementar recursos de acessibilidade em aplicações móveis criadas com Flutter, em razão das lacunas de conhecimento e da complexidade inerente a essa tarefa. A solução proposta visa simplificar e tornar mais prática a criação de aplicações móveis acessíveis, contribuindo para a melhoria da experiência dos PCDs ao utilizar essas aplicações.
+
+Para abordar este problema, serão investigadas as melhores práticas e técnicas disponíveis na literatura relacionadas à acessibilidade em aplicações móveis. Além disso, será desenvolvida uma aplicação de exemplo que demonstre a aplicabilidade das soluções propostas, servindo como referência para os desenvolvedores Flutter.
+
+\subsection{Objetivo Geral}
+
+O objetivo geral deste trabalho é apoiar o desenvolvimento de aplicativos móveis mais acessíveis. Para isso, visa-se criar uma extensão Flutter que facilite o processo de desenvolvimento de aplicações móveis acessíveis em Flutter para os desenvolvedores através da análise estática de código. A extensão fornecerá orientações e recomendações sobre a utilização de componentes e a aplicação de regras necessárias para cumprir com os requisitos de acessibilidade não funcionais. Através dessa abordagem, a extensão auxiliará os desenvolvedores a criar aplicativos mais inclusivos, melhorando a experiência dos PCDs ao utilizar essas aplicações.
+
+Além disso, este trabalho visa aumentar a conscientização sobre a importância da acessibilidade no desenvolvimento de aplicações móveis. Para isso, serão publicados os requisitos de acessibilidade utilizados durante o desenvolvimento da extensão, a fim de promover uma compreensão mais ampla das melhores práticas e normas aplicáveis a essa área.
+
+Dessa forma, a solução proposta contribui para resolver o problema apresentado ao facilitar a criação de aplicações móveis acessíveis em Flutter, fornecendo aos desenvolvedores as ferramentas e informações necessárias para atender aos requisitos de acessibilidade e, ao mesmo tempo, promovendo uma maior conscientização sobre a importância desse tema no contexto atual.
+
+\subsection{Objetivos Específicos}
+
+\subsubsection{Revisão da Literatura}
+
+Realizar um mapeamentosistemático da literatura para identificar os requisitos não funcionais de acessibilidade necessários para aplicações móveis, permitindo estabelecer uma base sólida para o desenvolvimento da extensão proposta e garantir a aderência às melhores práticas e normas do campo.
+
+\subsubsection{Projeto e Implementação da Extensão}
+
+Desenvolver uma extensão Flutter que analise o código-fonte de aplicações móveis e forneça orientações e recomendações sobre a utilização de componentes e a aplicação de regras de acessibilidade. A extensão deverá ser integrada ao ambiente de desenvolvimento e ser capaz de identificar possíveis problemas de acessibilidade no código, sugerindo soluções e boas práticas para corrigi-los.
+
+\subsubsection{Testes e Validação}
+
+Realizar testes e validações da extensão com desenvolvedores e PCDs para avaliar a eficácia e a usabilidade da ferramenta. Os testes serão conduzidos em um ambiente controlado, permitindo identificar possíveis falhas e melhorias na extensão, bem como coletar feedbacks e sugestões para aprimorar a solução proposta.
+
+\subsubsection{Documentar e Disseminar}
+
+Documentar o processo de desenvolvimento da extensão, incluindo os requisitos de acessibilidade utilizados, as técnicas e as ferramentas empregadas, e os resultados obtidos. Além disso, disseminar os resultados do trabalho por meio de artigos, apresentações e publicações, a fim de promover a conscientização sobre a importância da acessibilidade no desenvolvimento de aplicações móveis.
+
+\section{Justificativa}
+
+Este TCC foi desenvolvido considerando a crescente importância da inclusão e acessibilidade no desenvolvimento de aplicações móveis, bem como a necessidade de simplificar e otimizar o processo de desenvolvimento de soluções acessíveis utilizando Flutter. A escolha do Flutter como tecnologia central deste trabalho se justifica por ser um framework em rápido crescimento, adotado por um número cada vez maior de desenvolvedores, devido à sua capacidade de criar aplicativos de alta qualidade e com desempenho otimizado para múltiplas plataforma. Ademais, o Flutter é mantido e promovido pelo Google, o que reforça sua relevância e potencial no cenário atual de desenvolvimento de aplicações móveis.
+
+A escolha de uma extensão de análise estática de código como solução para o problema proposto se deve à sua capacidade de identificar problemas de acessibilidade no código-fonte e fornecer orientações e recomendações para corrigi-los. A análise estática de código é uma técnica amplamente utilizada no desenvolvimento de software para identificar possíveis falhas e melhorias no código, permitindo detectar problemas de acessibilidade em um estágio inicial do desenvolvimento e facilitar a correção desses problemas.
+
+A justificativa para o desenvolvimento deste TCC, portanto, reside na combinação da importância de promover a acessibilidade e inclusão no desenvolvimento de aplicações móveis com a crescente adoção do Flutter como tecnologia de referência para o desenvolvimento de aplicativos. Ao criar uma extensão que facilite o desenvolvimento de aplicações móveis acessíveis em Flutter, este trabalho visa contribuir para a democratização da acessibilidade e a melhoria da experiência dos PCDs ao utilizar aplicações móveis.
+
+\section{Metodologia}
+
+A metodologia adotada neste TCC foi baseada nas fases fundamentais da Engenharia de Software, incluindo análise (Engenharia de Requisitos), projeto, programação, testes e validação. Além disso, a execução do trabalho foi gerenciada utilizando a metodologia ágil Scrum para garantir um desenvolvimento iterativo e incremental do projeto. A seguir, detalhamos cada uma das fases e ferramentas utilizadas na metodologia:
+
+Engenharia de Requisitos: nesta fase, foi realizada um mapeamento sistemático da literatura para identificar os requisitos não funcionais de acessibilidade necessários para aplicações móveis. As principais fontes consultadas incluíram artigos científicos, livros e diretrizes de organizações especializadas em acessibilidade. As informações coletadas serviram como base para a definição dos requisitos que orientaram o desenvolvimento da extensão proposta.
+
+Projeto: com os requisitos de acessibilidade definidos, a próxima etapa foi projetar a extensão para Flutter. Nesta fase, foram elaborados os diagramas e especificações técnicas necessárias para detalhar a arquitetura e o funcionamento da extensão, incluindo a definição das funcionalidades e a interação com o ambiente de desenvolvimento.
+
+Programação: após a conclusão do projeto, a extensão foi implementada utilizando as linguagens de programação e as ferramentas compatíveis com o Flutter, como Dart, a extensão custom\_lint\_builder. O código-fonte foi versionado e gerenciado por meio do Git e hospedado em uma plataforma de repositórios (GitHub), para facilitar a colaboração e o acompanhamento das mudanças realizadas.
+
+Testes e validação: a extensão desenvolvida foi submetida a uma série de testes, envolvendo desenvolvedores e PCDs, a fim de avaliar sua efetividade e garantir que os requisitos de acessibilidade fossem atendidos. Os testes foram realizados em diversas etapas do desenvolvimento e incluíram testes funcionais, de usabilidade e de acessibilidade. Além disso, os requisitos não funcionais coletados na revisão da literatura foram validados por meio de testes estáticos.
+
+Gerenciamento do projeto (Scrum): para garantir um desenvolvimento eficiente e flexível, o projeto foi gerenciado utilizando a metodologia ágil Scrum. O trabalho foi dividido em Sprints, que são períodos de tempo fixos (geralmente de 2 a 4 semanas) nos quais um conjunto específico de tarefas é realizado. As tarefas foram organizadas e priorizadas em um Product Backlog.
 
 
 
-
-\begin{table}[!htbp]
+\begin{figure}[!h]
 	\centering
-%	\small
-	\renewcommand{\arraystretch}{1.3}
-	\caption{Formatação do papel e fonte.}%
-	\label{tab:quadro_exemplo}
-	\begin{tabular}{| L{3cm} | L{11cm} | }
-		\hline
-		\textbf{Elementos}		& \textbf{Apresentação gráfica}	 		\\ 
-		\hline
-		\hline
-%		& \multicolumn{2}{c}{\textbf{Dispositivos}} \\
-%		\cmidrule(lr{0.5ex}){2-3}
-		\multirow{2}{*}[-12pt]{\textbf{Papel}}	& Branco, em formato A4 (21 cm x 29,7 cm)
-													Os textos devem ser digitados na cor preta, podendo-se utilizar outras cores somente para as ilustrações (não são considerados o título, a fonte e legenda da ilustração, que devem ser na cor preta)
-													Os textos devem ser digitados no anverso da folha (frente), pois os trabalhos estarão disponíveis somente em formato digital 
-													 \\ 
-													 \cline{2-2}
-												& 	 Os elementos pré-textuais (folha de rosto, agradecimentos, resumo etc.), textuais (seções primárias) e pós-textuais (referências, apêndice etc.) devem iniciar sempre em nova página 
-												\\
-		\hline
-		\hline
-		\textbf{Margens} 			& Esquerda e superior: 3,0 cm \newline
-									Direita e inferior: 2,0 cm	\\
-		\hline
-		\hline
-		 				& Arial ou Times New Roman (padronizar uma fonte para todo o trabalho).  \\ \cline{2-2}
-		\textbf{Fonte}	& Tamanho 12 para todo o trabalho 	\\ \cline{2-2}
-						& Tamanho 10: citações com mais de três linhas, paginação, notas de rodapé, dados internacionais de catalogação na publicação, legendas e fontes das ilustrações e tabelas \\ 
-		\hline
-	\end{tabular}
-	\vspace{2mm}
-	\fonte{Elaborado pelos autores (2020), com base na NBR 14724 (2011).}
-\end{table}
-
-
-\section{SEÇÃO SECUNDÁRIA}
-
-A ABNT indica a elaboração de uma lista de ilustrações com todos os itens arrolados e designados por seu nome específico, conforme a ordem que aparecem no texto (Figura 1, Fotografia 1, Gráfico 1, Quadro 1, entre outros). Também recomenda, quando necessário, a elaboração de lista própria para cada tipo de ilustração. No entanto, não determina um número mínimo de ilustrações para tal lista específica.
-
-Nesse caso, a BU Udesc estabelece a elaboração de listas específicas para cada tipo de ilustração somente quando existirem muitos itens de cada tipo: cinco (5) ou mais (mais do que cinco desenhos, gráficos etc.). Caso contrário, elabora-se uma única lista, denominada “Lista de ilustrações” com os elementos ordenados conforme aparecem no texto, nominando-os “Figura” e, portanto, não diferenciando fotografia, gráfico, quadro e outros.
-
-
-\subsection{Seção terciária}
-
-O vídeo fornece uma maneira poderosa de ajudá-lo a provar seu argumento. Ao clicar em Vídeo Online, você pode colar o código de inserção do vídeo que deseja adicionar.
-
-\subsubsection{Seção quaternária}
-
-O vídeo fornece uma maneira poderosa de ajudá-lo a provar seu argumento. Ao clicar em Vídeo Online, você pode colar o código de inserção do vídeo que deseja adicionar. Você também pode digitar uma palavra-chave para pesquisar online o vídeo mais adequado ao seu documento. 
-
-
-\begin{figure}
-	\centering
-	\caption{Exemplo de paginação.}
-	\includegraphics[scale=1]{Textuais/Picture1.png}
-	\fonte{Elaborada pelos autores (2020), com base na NBR 14724 (2011).}
+	\caption{Figura 1 - Modelo de metologia}
+	\includegraphics[scale=1]{Assets/Modelo de metodologia.png}
+	\fonte{\me{2024}}
 \end{figure}
 
 
-\subsubsubsection{Seção quinaria}
 
+A metodologia adotada permitiu um desenvolvimento estruturado e ágil do TCC, garantindo que a extensão proposta fosse construída de acordo com os requisitos de acessibilidade identificados. Além disso, a utilização do Scrum proporcionou flexibilidade e adaptabilidade durante o desenvolvimento, possibilitando ajustes e melhorias contínuas.
 
+\section{Estrutura do trabalho}
 
-O vídeo fornece uma maneira poderosa de ajudá-lo a provar seu argumento. Ao clicar em Vídeo Online, você pode colar o código de inserção do vídeo que deseja adicionar. Você também pode digitar uma palavra-chave para pesquisar online o vídeo mais adequado ao seu documento. Para dar ao documento uma aparência profissional, o Word\footnote{O Microsoft Word é um processador de texto produzido pela Microsoft Office foi criado por Richard Brodie para computadores IBM PC com o sistema operacional DOS em 1983.} fornece designs de cabeçalho, rodapé, folha de rosto e caixa de texto que se complementam entre si. Por exemplo, você pode adicionar uma folha de rosto, um cabeçalho e uma barra lateral correspondentes.
+O presente trabalho está organizado em capítulos que abordam os principais aspectos relacionados ao desenvolvimento da extensão proposta. A estrutura do trabalho é a seguinte:
 
-\begin{table}[!htbp]
-	\centering
-	%	\small
-	\renewcommand{\arraystretch}{1.1}
-	\caption{Modelo de tabela.}%
-	\label{tab:tabela_exemplo}
-	\begin{tabular}{ L{4cm}  R{3cm} || L{4cm}  R{3cm}  }
-		\hline
-		Município		& População Estimada & Município		& População Estimada 		\\ 
-		\hline
-		Abdon Batista		& 2630	& Bom Jesus				& 2821 \\ 
-		Abelardo Luz		& 17717	& Bom Jesus do Oeste	& 2156 \\ 
-		Agrolândia			& 10272	& Bom Retiro			& 9598 \\ 
-		Agronômica			& 5306	& Bombinhas				& 17477 \\ 
-		Água Doce			& 7132	& Botuverá				& 4943 \\ 
-		Águas de Chapecó	& 6379	& Braço do Norte		& 31765 \\ 
-		\hline
-	\end{tabular}
-	\vspace{2mm}
-	\fonte{Adaptado de IBGE (2015).}
-\end{table}
-
-Clique em Inserir e escolha os elementos desejados nas diferentes galerias.
-
-\begin{figure}
-	\centering
-	\caption{População.}
-	\includegraphics[scale=1]{Textuais/Picture2.png}
-	\fonte{\me{2020}}
-\end{figure}
-
-As chamadas às equações e fórmulas, no texto, devem ser feitas da seguinte forma: equação (1), fórmula (2).
-
-\textbf{Exemplo 1:}
-O Teorema de Pitágoras, é uma equação \eqref{eq:eq1} que pode ser aplicada em qualquer triângulo retângulo (triângulo que tem um ângulo de 90°).
-\begin{equation} \label{eq:eq1}
-a^2 + b^2 = c^2 
-\end{equation}
-
-\textbf{Exemplo 2:}
-A dopamina é um composto orgânico de função mista álcool, fenol e amina que apresenta fórmula \eqref{eq:form1} molecular:
-\begin{equation} \label{eq:form1}
-\ch{C8 + H11NO2} 
-\end{equation}
-
-\textbf{Exemplo 3:}
-O modelo matemático de Huang (HUG), dado pelas equações \eqref{eq:eq3} e \eqref{eq:eq4}, foi elaborado com o intuito de fornecer uma descrição mais simples do crescimento bacteriano.
-\begin{gather} 
-	y(t) = y_0 + y_{max} -\ln{[e^{y_0}  + (e^{y_{max}} -e^{y_0} )  e^{-u_{max}\beta(t)} ]}   \label{eq:eq3}  \\
-	\beta(t) = t + \frac{1}{4}\ln\left( \frac{1+ e^{-4(t-\lambda)} }{1+ e^{4(\lambda)} }\right) \label{eq:eq4}
-\end{gather}
-\noindent onde $y(t)$ corresponde ao logaritmo natural da concentração celular (log UFC/g) no instante $t$ (dias), $y_{max}$ é o logaritmo natural da população bacteriana (log UFC/g) final, $y_0$ corresponde ao logaritmo natural da população bacteriana inicial (log UFC/g) e $\beta(t)$ é a função de transição.
-
-\textbf{Exemplo 4:}
-Para o cálculo da intensidade fórmula \eqref{eq:eq5} de Intensidade-Duração-Frequência apresentada, os valores encontrados seguindo os parâmetros apresentados e como o resultado é dado em mm/h haverá também a sua conversão para m/s.
-\begin{gather} 
-	i = \frac{K T^m}{(t+b)^n}   \label{eq:eq5}  \\[2ex]
-		i = \frac{\num{625.58} \cdot 5^{\num{0.171}}  }{(60+\num{8.89})^{\num{0.961}}} \\[2ex]
-		i = \num{44.222} \cdot \frac{\si{mm}}{\si{h}} \cdot \frac{1\mathrm{m}}{\SI{1000}{mm}} \cdot \frac{\SI{1}{h}}{\SI{3600}{s}} 	
-\end{gather}
-\noindent onde, $i$ é a intensidade média máxima de precipitação, em mm/h; $T$ é o Período de retorno, em anos; $t$ é a duração da chuva, em minutos; $k,m,b,n$ são os parâmetros da equação determinados para cada local.
-
-
-As citações diretas com até três linhas ``[...] devem estar contidas entre aspas duplas. As aspas simples são utilizadas para indicar citação no interior da citação.'' (ABNT, 2002, p. 2). Devem apresentar autor, ano e página. Quando a indicação de autor estiver dentro de parênteses, o sobrenome deve ser em letra maiúscula. 
-
-
-As citações diretas com mais três linhas ``[...] devem ser destacadas com recuo de 4 cm da margem esquerda, com letra menor que a do texto utilizado e sem as aspas.'' (ABNT, 2002, p. 2). Ou seja, utilizar fonte tamanho 10 para as citações diretas longas, com espaçamentos simples entre linhas. As citações devem ser precedidas e antecedidas por um (1) espaço de 1,5 entrelinhas. 
-
-\begin{citacao}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. (Silva, 2020, p. 21).
-\end{citacao}
-
-
-Nas citações indiretas não há necessidade de usar aspas e indicar a página, considerando que é uma paráfrase. Faz-se necessário apresentar o autor e ano. \\
-
-
-
-
-
-
-\noindent Exemplo referência de livro: \cite{exemplo_livro}
-
-\noindent Exemplo referência de livro em meio eletrônico: \cite{exemplo_livroe}
-
-\noindent Exemplo referência de trabalho acadêmico (Dissertação de Mestrado): \cite{exemplo_dissertacao}
-
-\noindent Exemplo referência de trabalho acadêmico (Tese de Doutorado): \cite{exemplo_tese}
-
-\noindent Exemplo referência de artigo: \cite{exemplo_artigo}
-
-\noindent \textbf{Para outras referências ver Manual Udesc}: \url{https://www.udesc.br/bu/manuais}
-
-
-
-
-
-
-
-
+\begin{itemize}
+	\item Capítulo 2 - Revisão da Literatura: apresenta uma revisão da literatura sobre acessibilidade em aplicações móveis, abordando os principais conceitos, técnicas e ferramentas relacionadas ao tema.
+	\item Capítulo 3 - Projeto e Implementação da Extensão: descreve o projeto e a implementação da extensão proposta, detalhando a arquitetura, as funcionalidades e as tecnologias utilizadas.
+	\item Capítulo 4 - Testes e Validação: apresenta os testes e validações realizados com desenvolvedores e PCDs para avaliar a eficácia e a usabilidade da extensão.
+	\item Capítulo 5 - Gerenciamento do Projeto: discute o gerenciamento do projeto, incluindo a metodologia ágil Scrum, as ferramentas utilizadas e os resultados obtidos.
+	\item Capítulo 6 - Conclusões: apresenta as conclusões do trabalho, discutindo os principais resultados, limitações e possíveis trabalhos futuros relacionados ao tema da acessibilidade em aplicações móveis.
+\end{itemize}

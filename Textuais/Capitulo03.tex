@@ -4,37 +4,37 @@ O objetivo desta seção é realizar uma análise comparativa de aplicações qu
 
 \section{ValidaWeb: Uma ferramenta para suporte ao desenvolvimento de software atendendo aos requisitos não funcionais de acessibilidade W3C}
 
-O ValidWeb (2022), é uma ferramenta voltada ao suporte no desenvolvimento de software voltados para a Web, que valida estruturas HTML e CSS com o objetivo de retornar sugestões sobre possíveis melhorias voltadas a acessibilidade. Tem como base os requisitos da W3C para definição de quais as propriedades são necessárias para uma boa acessibilidade do software que está sendo desenvolvido.
+O ValidaWeb \cite{validaweb}, é uma ferramenta voltada ao suporte no desenvolvimento de software voltados para a Web, que valida estruturas HTML e CSS com o objetivo de retornar sugestões sobre possíveis melhorias voltadas a acessibilidade. Tem como base os requisitos da W3C para definição de quais as propriedades são necessárias para uma boa acessibilidade do software que está sendo desenvolvido.
 
 \begin{figure}[!h]
 	\centering
 	\caption{Tela Principal do VSCode com a extensão ValidWeb.}
 	\includegraphics[width=432pt]{Assets/ValidaWeb.png}
-	\fonte{MOHR. P. 59. (2022)}
+	\fonte{\cite[p. 59]{validaweb}}
 \end{figure}
 
-A interface proposta pelo ValidWeb é intuitiva e prática. Por meio de destaques no texto, os desenvolvedores são notificados sobre inconsistências nas especificações de acessibilidade, que devem ser resolvidas para que esses destaques sejam removidos. Além disso, a ferramenta de MOHR (2022) também permite a geração de relatórios em PDF do estado atual do código, facilitando sua análise e compartilhamento com outros desenvolvedores, especialmente em ambientes de desenvolvimento que envolvem múltiplas equipes com controle de qualidade rigoroso.
+A interface proposta pelo ValidWeb é intuitiva e prática. Por meio de destaques no texto, os desenvolvedores são notificados sobre inconsistências nas especificações de acessibilidade, que devem ser resolvidas para que esses destaques sejam removidos. Além disso, a ferramenta de \cite{validaweb} também permite a geração de relatórios em PDF do estado atual do código, facilitando sua análise e compartilhamento com outros desenvolvedores, especialmente em ambientes de desenvolvimento que envolvem múltiplas equipes com controle de qualidade rigoroso.
 
 Dessa forma, o ValidWeb e o presente TCC compartilham objetivos similares, embora tenham focos tecnológicos distintos.
 
 \section{SonarQube: Ferramenta de auditoria de código com suporte para Flutter e Dart}
 
-O SonarQube, conforme descrito pela SonarSource (2023), é uma ferramenta robusta de análise estática de código. Seu objetivo é simplificar a padronização de projetos para desenvolvedores. A ferramenta dispõe de uma interface gráfica intuitiva que destaca os principais pontos de atenção na qualidade estática do código. Dentre os indicadores apresentados estão: número de bugs, vulnerabilidades, "Security Hotspots", dívida técnica, "Code Smells", cobertura de testes e linhas de código duplicadas, conforme ilustrado na Figura 4.
+O SonarQube, conforme descrito pela \cite{sonarqube}, é uma ferramenta robusta de análise estática de código. Seu objetivo é simplificar a padronização de projetos para desenvolvedores. A ferramenta dispõe de uma interface gráfica intuitiva que destaca os principais pontos de atenção na qualidade estática do código. Dentre os indicadores apresentados estão: número de bugs, vulnerabilidades, "Security Hotspots", dívida técnica, "Code Smells", cobertura de testes e linhas de código duplicadas, conforme ilustrado na Figura 4.
 
 \begin{figure}[!h]
 	\centering
 	\caption{Interface principal do SonarQube.}
 	\includegraphics[width=432pt]{Assets/SonarQube.png}
-	\fonte{GROUSSET (2023)}
+	\fonte{\cite{sonarflutter}}
 \end{figure}
 
-Por padrão, a ferramenta não oferece suporte para a linguagem Dart e o framework Flutter. No entanto, graças ao esforço da comunidade, especificamente da InsideApp (2023), uma empresa focada no desenvolvimento de aplicações móveis, foi criado um plugin que permite a interoperabilidade básica entre Flutter, Dart e SonarQube. Este plugin aproveita as regras padrões estabelecidas pelo Flutter para realizar a análise e fornecer sugestões de melhorias.
+Por padrão, a ferramenta não oferece suporte para a linguagem Dart e o framework Flutter. No entanto, graças ao esforço da comunidade, especificamente da InsideApp \cite{sonarflutter}, uma empresa focada no desenvolvimento de aplicações móveis, foi criado um plugin que permite a interoperabilidade básica entre Flutter, Dart e SonarQube. Este plugin aproveita as regras padrões estabelecidas pelo Flutter para realizar a análise e fornecer sugestões de melhorias.
 
-Ainda que o foco principal do SonarQube não seja a acessibilidade, a ferramenta, em conjunto com o SonarLint - também desenvolvido pela SonarSource (2023) - oferece sugestões ao desenvolvedor durante o processo de codificação na IDE. Esta funcionalidade se assemelha à proposta do presente TCC, demonstrando a potencialidade de uso dessas ferramentas em conjunto para melhorar tanto a qualidade do código quanto sua acessibilidade.
+Ainda que o foco principal do SonarQube não seja a acessibilidade, a ferramenta, em conjunto com o SonarLint - também desenvolvido pela SonarSource \cite{sonarqube} - oferece sugestões ao desenvolvedor durante o processo de codificação na IDE. Esta funcionalidade se assemelha à proposta do presente TCC, demonstrando a potencialidade de uso dessas ferramentas em conjunto para melhorar tanto a qualidade do código quanto sua acessibilidade.
 
 \section{accessibility\_tools: Pacote para validação de acessibilidade em aplicações Flutter}
 
-Conforme descrito pela Rebel AppStudio, mantenedora do pacote, o accessibility\_tools é uma suíte de ferramentas destinadas a melhorar a acessibilidade em aplicações desenvolvidas com Flutter. Troshkov (2023) destaca a importância da acessibilidade em aplicativos, ressaltando que "Criar um aplicativo acessível é extremamente importante. No entanto, é comumesquecer ou adiar essas melhorias. Este pacote garante que seu aplicativo seja acessível desde o primeiro dia, verificando a interface logo que é construída".
+Conforme descrito pela Rebel AppStudio, mantenedora do pacote, o accessibility\_tools é uma suíte de ferramentas destinadas a melhorar a acessibilidade em aplicações desenvolvidas com Flutter. \cite{accessibilitytools} destaca a importância da acessibilidade em aplicativos, ressaltando que "Criar um aplicativo acessível é extremamente importante. No entanto, é comum esquecer ou adiar essas melhorias. Este pacote garante que seu aplicativo seja acessível desde o primeiro dia, verificando a interface logo que é construída".
 
 A Figura 5 exemplifica o funcionamento da ferramenta durante a fase de desenvolvimento de uma aplicação. A ferramenta opera em tempo de execução, enfatizando possíveis melhorias de acessibilidade por meio de mensagens exibidas diretamente na interface.
 
@@ -42,14 +42,14 @@ A Figura 5 exemplifica o funcionamento da ferramenta durante a fase de desenvolv
 	\centering
 	\caption{Exemplo de retorno do pacote “accessibility\_tools” ao detectar uma inconsistência de acessibilidade.}
 	\includegraphics[width=384pt]{Assets/AccessibilityTools.png}
-	\fonte{TROSHKOV (2023)}
+	\fonte{\cite{accessibilitytools}}
 \end{figure}
 
-Até maio de 2023, o pacote suporta a validação de áreas mínimas de toque, semântica de botões, sobreposição de textos e descrição de campos de entrada. Embora a ferramenta cubra apenas alguns aspectos de acessibilidade, ela representa um ponto de partida valioso para desenvolvedores Flutter interessados em melhorar a acessibilidade de suas aplicações.
+Até agosto de 2023, o pacote suporta a validação de áreas mínimas de toque, semântica de botões, sobreposição de textos e descrição de campos de entrada. Embora a ferramenta cubra apenas alguns aspectos de acessibilidade, ela representa um ponto de partida valioso para desenvolvedores Flutter interessados em melhorar a acessibilidade de suas aplicações.
 
 A abordagem adotada no presente TCC difere em aspectos importantes. Em vez de operar em tempo de execução, o foco está na análise estática de código para fornecer sugestões diretamente na IDE. Isso elimina a necessidade de compilar e executar a aplicação para avaliar as necessidades de acessibilidade, permitindo que os desenvolvedores identifiquem e resolvam problemas de acessibilidade mais rapidamente.
 
-\section{Análise e compraração de trabalhos correlatos}
+\section{Análise e comparação de trabalhos correlatos}
 
 O universo de ferramentas disponíveis para auxiliar no desenvolvimento de aplicações acessíveis é vasto e diversificado. No entanto, as ferramentas discutidas neste capítulo foram escolhidas por sua relevância e semelhanças com a proposta deste TCC. Cada uma delas utiliza um conjunto de regras ou requisitos não funcionais de acessibilidade para estabelecer padrões e oferecer sugestões de modificações, dependendo do estado da aplicação em desenvolvimento. A identificação desses requisitos será uma etapa crucial na elaboração da proposta deste TCC.
 

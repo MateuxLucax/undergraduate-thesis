@@ -13,3 +13,108 @@ Com a conclusão da etapa de Projeto, o processo de Desenvolvimento será inicia
 Após a conclusão do desenvolvimento, a etapa de Testes será iniciada. Nela, será adotado o TDD, serão realizados Testes de Unidade e de Integração, bem como Testes dos Requisitos não funcionais de Acessibilidade.
 
 Finalmente, na etapa de Validação, será realizada uma pesquisa com desenvolvedores e pessoas com deficiência, aplicado o SUS e executada uma prova de conceito. Essa etapa final permitirá avaliar a eficácia da ferramenta desenvolvida e identificar áreas de melhoria potencial. Cada uma dessas etapas será discutida em detalhes nas seções subsequentes deste capítulo.
+
+\section{Mapeamento Inicial}
+
+O processo inicial de mapeamento é fundamental para a abordagem de identificação dos Requisitos Funcionais (RF), Requisitos Não Funcionais (RNF) e Regras de Negócio (RN).
+
+Os Requisitos Funcionais (RF) são destinados a descrever as funcionalidades que o sistema deve incorporar para atender às necessidades do usuário final. Estes requisitos são essencialmente as ações que o sistema deve ser capaz de realizar, como por exemplo, processar entradas de dados, realizar operações e fornecer saídas de informações.
+
+Por outro lado, os Requisitos Não Funcionais (RNF) definem o conjunto de critérios que orientam o modo como o sistema operará, como as restrições e propriedades desejáveis do sistema que não estão diretamente relacionadas com o comportamento específico dele. Eles estabelecem um escopo com características particulares que o sistema a ser desenvolvido deverá seguir, tais como padrões de projeto, usabilidade, segurança, desempenho, entre outros. Em outras palavras, os RNF são os atributos de qualidade do sistema que determinam como os requisitos funcionais devem ser implementados.
+
+As Regras de Negócio (RN), por sua vez, são diretrizes que definem ou restringem algum aspecto do negócio. Elas descrevem os detalhes das funcionalidades que o sistema deve possuir, para que estas possam ser implementadas de forma a não causar prejuízos a outras funcionalidades. Elas fornecem uma compreensão clara de como o sistema deve se comportar em determinadas circunstâncias e auxiliam na garantia de que o sistema esteja alinhado com as metas e estratégias do negócio.
+
+Em suma, a identificação e compreensão desses três elementos - RF, RNF e RN - são cruciais para o sucesso do desenvolvimento do sistema, garantindo que ele seja construído de acordo com as necessidades do negócio e dos usuários, além de cumprir com os critérios de qualidade estabelecidos.
+
+\subsection{Requisitos Funcionais}
+
+Os Requisitos Funcionais (RF) identificados para o sistema proposto são:
+
+\newcounter{rf} 
+\renewcommand{\therf}{RF\arabic{rf}}
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Requisitos Funcionais do TCC}
+	\label{tab:tabela-requisitos-funcionais}
+	\begin{tabular}{ L{2cm}  L{12cm} }
+		\hline
+		Requisito & Descrição \\
+		\hline
+		\refstepcounter{rf}\therf	& O sistema deve analisar código escrito na linguagem Dart \\
+    \refstepcounter{rf}\therf	& O sistema deve possuir requisitos não funcionais voltados a acessibilidade \\
+    \refstepcounter{rf}\therf	& O sistema deve permitir a visualização de inconsistências no código \\
+    \refstepcounter{rf}\therf	& O sistema deve realizar marcações no código baseado na especificação definida \\
+    \refstepcounter{rf}\therf	& O sistema deve sugerir remover trechos de código baseado na especificação definida \\
+    \refstepcounter{rf}\therf	& O sistema deve sugerir correções automáticas baseado na especificação definida \\
+    \refstepcounter{rf}\therf	& O sistema deve permitir o usuário consultar todas as baseado os requisitos não funcionais de acessibilidade \\
+    \refstepcounter{rf}\therf	& O sistema deve permitir o usuário desabilitar requisitos não funcionais de acessibilidade \\
+    \refstepcounter{rf}\therf	& O sistema deve permitir a validação de todo o diretório de
+    código fonte da aplicação desenvolvida \\
+		\hline
+	\end{tabular}
+	\vspace{2mm}
+	\fonte{\me{2023}}
+\end{table}
+
+\pagebreak
+
+\subsection{Requisitos Não Funcionais}
+
+Os Requisitos Não Funcionais (RNF) identificados para o sistema proposto são:
+
+\newcounter{rnf}
+\renewcommand{\thernf}{RNF\arabic{rnf}}
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Requisitos Não Funcionais do TCC}
+	\label{tab:tabela-requisitos-nao-funcionais}
+	\begin{tabular}{ L{2cm}  L{12cm} }
+		\hline
+		Requisito & Descrição \\
+		\hline
+		\refstepcounter{rnf}\thernf	& O sistema deve ser escrito utilizando a linguagem Dart \\
+		\refstepcounter{rnf}\thernf	& O sistema deve ser publicado no repositório \href{https:\\pub.dev}{pub.dev} \\
+		\refstepcounter{rnf}\thernf	& O sistema deve seguir as melhores práticas para pacotes publicados no repositório \href{https:\\pub.dev}{pub.dev} \\
+    \refstepcounter{rnf}\thernf	& O sistema deve possuir licença aberta para permitir alterações e melhorias \\
+    \refstepcounter{rnf}\thernf	& O sistema deve possuir documentação para auxiliar na criação de novas regras de negócio de usabilidade \\
+		\hline
+	\end{tabular}
+	\vspace{2mm}
+	\fonte{\me{2024}}
+\end{table}
+
+\subsection{Regras de Negócio}
+
+As Regras de Negócio (RN) identificadas para o sistema proposto são:
+
+\newcounter{rn} 
+\renewcommand{\thern}{RN\arabic{rn}}
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Regras de negócio do TCC}
+	\label{tab:tabela-regras-de-negocio}
+	\begin{tabular}{ L{2cm}  L{12cm} }
+		\hline
+		Regra de Negócio & Descrição \\
+		\hline
+		\refstepcounter{rn}\thern	& O sistema deve analisar código escrito na linguagem Dart \\
+    \refstepcounter{rn}\thern	& O sistema deve possuir requisitos não funcionais voltados a acessibilidade \\
+    \refstepcounter{rn}\thern	& O sistema deve permitir a visualização de inconsistências no código \\
+    \refstepcounter{rn}\thern	& O sistema deve realizar marcações no código baseado na especificação definida \\
+    \refstepcounter{rn}\thern	& O sistema deve sugerir remover trechos de código baseado na especificação definida \\
+    \refstepcounter{rn}\thern	& O sistema deve sugerir correções automáticas baseado na especificação definida \\
+    \refstepcounter{rn}\thern	& O sistema deve permitir o usuário consultar todas as baseado os requisitos não funcionais de acessibilidade \\
+    \refstepcounter{rn}\thern	& O sistema deve permitir o usuário desabilitar requisitos não funcionais de acessibilidade \\
+    \refstepcounter{rn}\thern	& O sistema deve permitir a validação de todo o diretório de
+    código fonte da aplicação desenvolvida \\
+		\hline
+	\end{tabular}
+	\vspace{2mm}
+	\fonte{\me{2024}}
+\end{table}

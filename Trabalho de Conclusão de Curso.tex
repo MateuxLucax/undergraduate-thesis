@@ -105,7 +105,6 @@
 \include{PreTextuais/FolhadeRosto}			% Elemento Obrigatório
 % Caso não utilize a Ficha Catalográfica entre na folha de rosto e retire o * de dentro do arquivo FolhadeRosto
 \include{PreTextuais/FichaCatalografica}	% Elemento Obrigatório (Verso da Folha)
-\include{PreTextuais/Errata}				% Elemento Opcional
 \include{PreTextuais/FolhadeAprovacao}		% Elemento Obrigatório
 \include{PreTextuais/Dedicatoria}			% Elemento Opcional
 \include{PreTextuais/Agradecimentos}		% Elemento Opcional
@@ -150,9 +149,9 @@
 %pasta em que está compilando o documento.
 
 % Arquivo alterado para citação (Autor, Ano) ao invés de (AUTOR, Ano) conforme ABNT NBR 10520:2023
-\bibliographystyle{abntex2-alf_revNBR2023.bst}	
+\bibliographystyle{PosTextuais/BibliografiaEstilo.bst}	% Elemento Obrigatório
 
-\bibliography{abntex2-	}	% Elemento Obrigatório
+\bibliography{PosTextuais/Bibliografia}	% Elemento Obrigatório
 
 \include{PosTextuais/Glossario}				% Elemento Opcional
 

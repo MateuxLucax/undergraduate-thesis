@@ -305,5 +305,4 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 
-!abntex2-ref_UDESC_2020.bst
-!abntex2-ref_UDESC_2020.bib
+.vscode/

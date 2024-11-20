@@ -19,11 +19,12 @@ Dessa forma, o ValidWeb e o presente TCC compartilham objetivos similares, embor
 
 \section{SonarQube: Ferramenta de auditoria de código com suporte para Flutter e Dart}
 
-O SonarQube, conforme descrito pela \cite{sonarqube}, é uma ferramenta robusta de análise estática de código. Seu objetivo é simplificar a padronização de projetos para desenvolvedores. A ferramenta dispõe de uma interface gráfica intuitiva que destaca os principais pontos de atenção na qualidade estática do código. Dentre os indicadores apresentados estão: número de bugs, vulnerabilidades, "Security Hotspots", dívida técnica, "Code Smells", cobertura de testes e linhas de código duplicadas, conforme ilustrado na Figura 4.
+O SonarQube, conforme descrito pela \cite{sonarqube}, é uma ferramenta robusta de análise estática de código. Seu objetivo é simplificar a padronização de projetos para desenvolvedores. A ferramenta dispõe de uma interface gráfica intuitiva que destaca os principais pontos de atenção na qualidade estática do código. Dentre os indicadores apresentados estão: número de bugs, vulnerabilidades, "Security Hotspots", dívida técnica, "Code Smells", cobertura de testes e linhas de código duplicadas, conforme ilustrado na Figura \ref{fig:sonarqube}.
 
 \begin{figure}[!h]
 	\centering
 	\caption{Interface principal do SonarQube.}
+	\label{fig:sonarqube}
 	\includegraphics[width=432pt]{Assets/SonarQube.png}
 	\fonte{\cite{sonarflutter}}
 \end{figure}
@@ -36,11 +37,12 @@ Ainda que o foco principal do SonarQube não seja a acessibilidade, a ferramenta
 
 Conforme descrito pela Rebel AppStudio, mantenedora do pacote, o accessibility\_tools é uma suíte de ferramentas destinadas a melhorar a acessibilidade em aplicações desenvolvidas com Flutter. \cite{accessibilitytools} destaca a importância da acessibilidade em aplicativos, ressaltando que "Criar um aplicativo acessível é extremamente importante. No entanto, é comum esquecer ou adiar essas melhorias. Este pacote garante que seu aplicativo seja acessível desde o primeiro dia, verificando a interface logo que é construída".
 
-A Figura 5 exemplifica o funcionamento da ferramenta durante a fase de desenvolvimento de uma aplicação. A ferramenta opera em tempo de execução, enfatizando possíveis melhorias de acessibilidade por meio de mensagens exibidas diretamente na interface.
+A Figura \ref{fig:accessibilitytools} exemplifica o funcionamento da ferramenta durante a fase de desenvolvimento de uma aplicação. A ferramenta opera em tempo de execução, enfatizando possíveis melhorias de acessibilidade por meio de mensagens exibidas diretamente na interface.
 
 \begin{figure}[!h]
 	\centering
 	\caption{Exemplo de retorno do pacote “accessibility\_tools” ao detectar uma inconsistência de acessibilidade.}
+	\label{fig:accessibilitytools}
 	\includegraphics[width=384pt]{Assets/AccessibilityTools.png}
 	\fonte{\cite{accessibilitytools}}
 \end{figure}
@@ -53,11 +55,12 @@ A abordagem adotada no presente TCC difere em aspectos importantes. Em vez de op
 
 O universo de ferramentas disponíveis para auxiliar no desenvolvimento de aplicações acessíveis é vasto e diversificado. No entanto, as ferramentas discutidas neste capítulo foram escolhidas por sua relevância e semelhanças com a proposta deste TCC. Cada uma delas utiliza um conjunto de regras ou requisitos não funcionais de acessibilidade para estabelecer padrões e oferecer sugestões de modificações, dependendo do estado da aplicação em desenvolvimento. A identificação desses requisitos será uma etapa crucial na elaboração da proposta deste TCC.
 
-Na Tabela 1 a seguir, é feita uma comparação entre as funcionalidades das ferramentas discutidas e os requisitos deste trabalho. Esta tabela ajuda a identificar áreas para melhoria na proposta deste TCC e também destaca as deficiências das outras ferramentas em comparação com a proposta atual.
+Na Tabela \ref{tab:comparacao-ferramentas} a seguir, é feita uma comparação entre as funcionalidades das ferramentas discutidas e os requisitos deste trabalho. Esta tabela ajuda a identificar áreas para melhoria na proposta deste TCC e também destaca as deficiências das outras ferramentas em comparação com a proposta atual.
 
 \begin{table}[!h]
 	\centering
 	\caption{Comparação entre as funcionalidades das ferramentas discutidas e os requisitos deste trabalho.}
+	\label{tab:comparacao-ferramentas}
 	\begin{tabular}{|l|c|c|c|c|}
 		\hline
 		\textbf{Funcionalidade} & \textbf{ValidaWeb} & \textbf{SonarQube} & \makecell{\textbf{accessibility}\\\textbf{tools}} & \textbf{Proposta Atual} \\ \hline
@@ -71,4 +74,4 @@ Na Tabela 1 a seguir, é feita uma comparação entre as funcionalidades das fer
 	\fonte{\me{2024}}
 \end{table}
 
-A análise da Tabela 1 revela que, embora quase todas as funcionalidades sejam atendidas por uma ou mais das ferramentas, nenhuma delas oferece todas as funcionalidades em um único pacote. Notavelmente, a funcionalidade de sugestão de correção é uma característica distintiva da proposta atual, potencialmente agilizando o processo de desenvolvimento ao fornecer soluções rápidas para os desenvolvedores assim que identificarem a necessidade de melhorar a acessibilidade de suas aplicações.
+A análise da Tabela \ref{tab:comparacao-ferramentas} revela que, embora quase todas as funcionalidades sejam atendidas por uma ou mais das ferramentas, nenhuma delas oferece todas as funcionalidades em um único pacote. Notavelmente, a funcionalidade de sugestão de correção é uma característica distintiva da proposta atual, potencialmente agilizando o processo de desenvolvimento ao fornecer soluções rápidas para os desenvolvedores assim que identificarem a necessidade de melhorar a acessibilidade de suas aplicações.

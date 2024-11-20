@@ -58,7 +58,7 @@ Os Requisitos Funcionais (RF) identificados para o sistema proposto são:
 	\fonte{\me{2023}}
 \end{table}
 
-\pagebreak
+Dos requisitos funcionais da tabela \ref{tab:tabela-requisitos-funcionais}, destaca-se a necessidade de analisar código escrito na linguagem Dart, isso depende de uma ferramenta capaz de processar e interpretar o código fonte da aplicação desenvolvida com Flutter. A equipe do Dart provê uma API para análise estática de código, que será utilizada através do plugin \href{https://pub.dev/packages/analyzer}{analyzer}. Ele já provê uma interface para acessar a árvore sintática abstrata do código fonte, que será utilizada para identificar e marcar as inconsistências no código.
 
 \subsection{Requisitos Não Funcionais}
 
@@ -87,6 +87,8 @@ Os Requisitos Não Funcionais (RNF) identificados para o sistema proposto são:
 	\fonte{\me{2024}}
 \end{table}
 
+Dos requisitos funcionais descritos na tabela \ref{tab:tabela-requisitos-nao-funcionais}, destaca-se a necessidade de seguir as melhores práticas para pacotes publicados no repositório \href{https:\\pub.dev}{pub.dev}. Isso é importante para garantir que o sistema seja facilmente acessível e utilizável por outros desenvolvedores, além de manter a qualidade e a segurança do código fonte. A equipe do Dart provê um guia de boas práticas para publicação de pacotes no repositório \href{https:\\pub.dev}{pub.dev}, que será seguido para garantir a qualidade e a segurança do sistema. Ele também é uma das formas que o repositório classifica plugins auxiliando na escolha dos usuários.
+
 \subsection{Regras de Negócio}
 
 As Regras de Negócio (RN) identificadas para o sistema proposto são:
@@ -103,18 +105,46 @@ As Regras de Negócio (RN) identificadas para o sistema proposto são:
 		\hline
 		Regra de Negócio & Descrição \\
 		\hline
-		\refstepcounter{rn}\thern	& O sistema deve analisar código escrito na linguagem Dart \\
-    \refstepcounter{rn}\thern	& O sistema deve possuir requisitos não funcionais voltados a acessibilidade \\
-    \refstepcounter{rn}\thern	& O sistema deve permitir a visualização de inconsistências no código \\
-    \refstepcounter{rn}\thern	& O sistema deve realizar marcações no código baseado na especificação definida \\
-    \refstepcounter{rn}\thern	& O sistema deve sugerir remover trechos de código baseado na especificação definida \\
-    \refstepcounter{rn}\thern	& O sistema deve sugerir correções automáticas baseado na especificação definida \\
-    \refstepcounter{rn}\thern	& O sistema deve permitir o usuário consultar todas as baseado os requisitos não funcionais de acessibilidade \\
-    \refstepcounter{rn}\thern	& O sistema deve permitir o usuário desabilitar requisitos não funcionais de acessibilidade \\
-    \refstepcounter{rn}\thern	& O sistema deve permitir a validação de todo o diretório de
-    código fonte da aplicação desenvolvida \\
+		\refstepcounter{rn}\thern	& As regras de acessibilidade devem ser separadas por pastas para organização clara e simplificada \\
+    \refstepcounter{rn}\thern	& Cada regra de acessibilidade deve possuir testes automatizados para validar seu funcionamento \\
+    \refstepcounter{rn}\thern	& Cada regra de acessibilidade deve possuir uma descrição clara e objetiva para facilitar a compreensão do desenvolvedor \\
+    \refstepcounter{rn}\thern	& Cada regra de acessibilidade deve possuir uma sugestão de correção \\
+    \refstepcounter{rn}\thern	& Cada regra de acessibilidade deve possuir uma marcação no código para indicar a inconsistência \\
+    \refstepcounter{rn}\thern & As marcações devem ser na cor Laranja, uma vez que a cor vermelha é utilizada para erros de compilação \\
 		\hline
 	\end{tabular}
 	\vspace{2mm}
 	\fonte{\me{2024}}
 \end{table}
+
+Além das regras de negócio listadas na tabela \ref{tab:tabela-regras-de-negocio}, destaca-se a necessidade de separar as regras de acessibilidade por pastas para organização clara e simplificada. A ideia inicial era utilizar um Mapeamento Sistemático da Literatura para identificar as regras de acessibilidade mais utilizadas e criar um conjunto de regras de acessibilidade padrão. Porém, conforme será descrito nos próximos capítulos, não foi possível levantar um conjunto de regras de acessibilidade padrão, então optou-se por criar um conjunto de regras de acessibilidade baseado nas recomendações de ambas as plataformas.
+
+\section{Modelagem}
+
+Com os requisitos identificados, a próxima etapa é a Modelagem, onde serão construídos os diagramas e modelos que servirão como base para o desenvolvimento do sistema.
+
+\subsection{Diagrama de Sequência}
+
+Diagramas de sequência são diagramas de interação que mostram como grupos de objetos colaboram em algum comportamento ao longo do tempo. Eles são usados para capturar o comportamento de um único caso de uso, ou seja, um cenário específico de interação entre objetos.
+
+O diagrama de sequência da figura \ref{fig:diagrama-sequencia-plugin} a seguir ilustra a interação básica do desenvolvedor com o plugin:
+
+\begin{figure}[!h]
+	\centering
+	\caption{Interação do desenvolvedor com o plugin}\label{fig:diagrama-sequencia-plugin}
+	\includegraphics[width=325pt]{Assets/DiagramaSequenciaIDELSPPlugin.png}
+	\fonte{\me{2024}}
+\end{figure}
+
+Como podemos ver na figura \ref{fig:diagrama-sequencia-plugin}, o desenvolvedor interage com o plugin através da IDE, que por sua vez executa a análise estática do código fonte da aplicação desenvolvida com Flutter. O plugin então marca o código fonte baseado nas regras de acessibilidade definidas e sugere correções automáticas. Isso torna todo o processo de desenvolvimento mais eficiente e permite que regras de acessibilidade sejam aplicadas desde o início do desenvolvimento sem a necessidade de compilar e executar a aplicação.
+
+Entretanto o diagrama da figura \ref{fig:diagrama-sequencia-plugin} não mostra a interação do plugin com as regras de acessibilidade, para isso foi criado o diagrama de sequência da figura \ref{fig:diagrama-sequencia-regra-acessibilidade}:
+
+\begin{figure}[!h]
+  \centering
+  \caption{Interação do plugin com as regras de acessibilidade}\label{fig:diagrama-sequencia-regra-acessibilidade}
+  \includegraphics[width=325pt]{Assets/DiagramaPluginRegrasAcessibilidade.png}
+  \fonte{\me{2024}}
+\end{figure}
+
+Como é possível identificar na figura \ref{fig:diagrama-sequencia-regra-acessibilidade}, o ponto de partida é o LSP que envia o código fonte do desenvolvedor para o Plugin, que então irá processar o código fonte aplicando todas as regras de acessibilidade definidas de uma forma sequencial. Cada regra de acessibilidade é aplicada ao código fonte e, caso uma inconsistência seja encontrada, o plugin marca o código fonte e sugere correções automáticas.

@@ -52,3 +52,19 @@ Flutter é uma estrutura de desenvolvimento de aplicativo que usa a linguagem de
 Sendo assim, segundo a mantenedora o Flutter oferece melhor desempenho, capacidade de “Hot Reload” permitindo que os desenvolvedores experimentem e construam interfaces mais rapidamente, Personalização através de um rico conjunto de “Widgets” --- os “blocos de construção” do Flutter --- seguindo inicialmente diretrizes do Material Design para Android e Cupertino para iOS mas sem bloquear modificações do desenvolvedor e também, permite o desenvolvimento de aplicativos para diferentes plataformas partindo de uma única fonte de código.
 
 Ademais, o Flutter oferece uma série de recursos que ajudam os desenvolvedores a criar aplicativos acessíveis. Ela suporta APIs de acessibilidade para Android e iOS, incluindo a API TalkBack para Android e a API VoiceOver para iOS. Além disso, o Flutter tem suporte para ampliação de tela, fontes maiores, contraste de cores suficiente e navegação por teclado \cite{flutter}. Entretanto ainda necessitam que o desenvolvedor utilize das ferramentas providas para criar aplicações realmente acessíveis.
+
+\section{Análise Estática}
+
+Análise Estática segundo \cite{craftinginterpreters} é uma técnica de verificação de programas que examina o código-fonte sem executá-lo, identificando possíveis erros, inconsistências e violações de regras de programação. Ela é amplamente utilizada em compiladores, ferramentas de análise de código e linters para garantir a correção e a qualidade do código.
+
+Essa etapa no processamento de código fonte é usualmente utilizado na compilação ou interpretação de um código, entretanto, ferramentas de análise estática podem ser utilizadas para verificar a conformidade do código com padrões de codificação, identificar possíveis vulnerabilidades de segurança e otimizar a performance do código durante o processo de desenvolvimento.
+
+Essa técnica será o pilar para a construção da extensão proposta neste trabalho, pois será responsável por analisar o código fonte de aplicações móveis desenvolvidas com Flutter e identificar possíveis violações de regras de acessibilidade e boas práticas de desenvolvimento em tempo real para auxiliar o desenvolvedor.
+
+\subsection[AST]{Árvore Sintática Abstrata}
+
+A construção de uma Árvore Sintática Abstrata (AST, do inglês Abstract Syntax Tree) é uma etapa fundamental no processo de compilação, sendo responsável por representar a estrutura de um programa de forma hierárquica e abstrata. De acordo com \cite{livrododragao}, a AST organiza as construções da linguagem em nós que correspondem aos elementos essenciais do programa, eliminando detalhes sintáticos desnecessários, como pontuação e regras intermediárias presentes na gramática. Assim, a AST fornece uma visão condensada do programa, capturando sua lógica e estrutura de forma que facilite etapas subsequentes, como a análise semântica e a geração de código.
+
+Com base nesses princípios, a AST e a análise estática são amplamente utilizadas não apenas em compiladores tradicionais, mas também em ferramentas modernas, como linters e otimizadores de código. Essas ferramentas aproveitam a representação abstrata fornecida pela AST para realizar diagnósticos e aplicar melhorias, garantindo que o código esteja em conformidade com padrões estabelecidos e otimizado para execução.
+
+Com uma AST é possível fazer a análise necessária para validar regras de acessibilidade em qualquer linguagem. Para o presente trabalho, a AST será utilizada para analisar o código fonte de aplicações móveis desenvolvidas com Flutter e identificar possíveis violações de regras de acessibilidade e boas práticas de desenvolvimento móvel.

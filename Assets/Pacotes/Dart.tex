@@ -1,0 +1,46 @@
+%Created by Leonardo Rignanese (rignaneseleo)
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors to use
+% You can change the colors (use http://latexcolor.com/)
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1, 1, 1}
+
+% Define the codebox
+\lstset{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	morestring=*[d]{"}
+	%frame=shadowbox
+}   
+
+% Define the code emph rules
+\lstset{
+	% Types
+	emph=[1]{var, String, int, List, void, Future, await, if, else, throw, async, true, false, Map, AnalysisDriverGeneric},% Insert here the types you are using
+	emphstyle=[1]{\color{codepurple}},
+	% Functions
+	emph=[2]{findAllElements,findElements, setState, send, fromPath, add, parse, bytesToString},% Insert here the methods you are using
+	emphstyle=[2]{\color{magenta}}%
+  % Language keywords
+  emph=[3]{import, export, class, extends, with, implements, get, set, new, final, static, const, abstract, super, this, return, for, while, do, switch, case, break, continue, default, in, is, as, try, catch, finally, on, rethrow, assert, enum, typedef, yield, async, await, sync, sync*} % Insert here the keywords you are using
+  emphstyle=[3]{\color{blue}}%
+}

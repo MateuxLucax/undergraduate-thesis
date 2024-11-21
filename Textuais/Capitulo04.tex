@@ -50,8 +50,8 @@ Os Requisitos Funcionais (RF) identificados para o sistema proposto são:
     \refstepcounter{rf}\therf	& O sistema deve sugerir correções automáticas baseado na especificação definida \\
     \refstepcounter{rf}\therf	& O sistema deve permitir o usuário consultar todas as baseado os requisitos não funcionais de acessibilidade \\
     \refstepcounter{rf}\therf	& O sistema deve permitir o usuário desabilitar requisitos não funcionais de acessibilidade \\
-    \refstepcounter{rf}\therf	& O sistema deve permitir a validação de todo o diretório de
-    código fonte da aplicação desenvolvida \\
+    \refstepcounter{rf}\therf	& O sistema deve permitir a utilização em ambientes de integração contínua \\
+
 		\hline
 	\end{tabular}
 	\vspace{2mm}
@@ -148,3 +148,70 @@ Entretanto o diagrama da figura \ref{fig:diagrama-sequencia-plugin} não mostra 
 \end{figure}
 
 Como é possível identificar na figura \ref{fig:diagrama-sequencia-regra-acessibilidade}, o ponto de partida é o LSP que envia o código fonte do desenvolvedor para o Plugin, que então irá processar o código fonte aplicando todas as regras de acessibilidade definidas de uma forma sequencial. Cada regra de acessibilidade é aplicada ao código fonte e, caso uma inconsistência seja encontrada, o plugin marca o código fonte e sugere correções automáticas.
+
+Um dos requisitos é ser possível utilizar o plugin através de uma linha de comando possibilitando integração com ambientes de integração contínua, para isso foi criado o diagrama de sequência da figura \ref{fig:diagrama-sequencia-linha-comando}:
+
+\begin{figure}[!h]
+	\centering
+	\caption{Interação do plugin com a linha de comando}\label{fig:diagrama-sequencia-linha-comando}
+	\includegraphics[width=325pt]{Assets/DiagramaSequenciaLinhaComando.png}
+	\fonte{\me{2024}}
+\end{figure}
+
+O principal objetivo de integrar o plugin em ambientes de integração contínua é garantir que as regras de acessibilidade sejam aplicadas em todas as fases do desenvolvimento, desde a escrita do código até a compilação e execução da aplicação. Isso permite que os desenvolvedores travem a publicação de aplicações que não atendam aos requisitos de acessibilidade, garantindo que todas as aplicações desenvolvidas com Flutter sejam acessíveis a todos os usuários.
+
+\subsection{Provas de Conceito}
+
+\subsubsection{Extensão para Visual Studio Code}
+
+Na concepção do projeto, a ideia era criar uma extensão para Visual Studio Code capaz de realizar a análise estática de código Dart e Flutter e retornar ao usuário as regras de acessibilidade que não foram seguidas. Porém, durante o desenvolvimento, percebeu-se que a seria necessário desenvolver toda uma infraestrutura de análise estática de código, o que demandaria muito tempo e recursos. Além disso, a equipe do Dart já provê uma API para análise estática de código, que será utilizada através do plugin \href{https://pub.dev/packages/analyzer}{analyzer}. 
+
+Ademais, uma implementação focada em Visual Studio Code limitaria o alcance do projeto, uma vez que a extensão seria específica para essa IDE. Por isso, optou-se por desenvolver um plugin para LSP, que é uma interface de comunicação entre a IDE e o plugin, permitindo que o plugin seja utilizado em qualquer IDE que suporte LSP. Porém, ainda assim esbarra-se na necessidade de desenvolver uma infraestrutura de análise estática de código, o que demandaria muito tempo e recursos.
+
+\subsubsection{Extensão para DevTools do Flutter}
+
+DevTools é uma ferramenta de diagnóstico para Flutter que permite visualizar e inspecionar o comportamento da aplicação em execução. A ideia era criar uma extensão para DevTools capaz de realizar a análise estática de código Dart e Flutter e retornar ao usuário as regras de acessibilidade que não foram seguidas. Tal implementação seria agnóstica de IDE e uma vez que desenvolvida em Dart, poderia utilizar o pacote \href{https://pub.dev/packages/analyzer}{analyzer} para realizar a análise estática de código e processar o código fonte da aplicação desenvolvida com Flutter.
+
+Porém, tal abordagem não seria capaz de marcar o código fonte da aplicação desenvolvida com Flutter, uma vez que DevTools é uma ferramenta de diagnóstico e não uma IDE. Sendo assim, tal ideia foi descartada após a realização de alguns testes.
+
+\subsubsection{Plugin para Dart utilizando o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin}}
+
+Haja vista que o projeto visava criar um plugin agnóstico de IDE porém ainda capaz de se comunicar com LSP tornando possível a marcação, sugestão de correção e validação de regras de acessibilidade, foi decidido utilizar o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin} para criar um plugin para Dart. O pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin} é uma API para criar plugins para o Dart Analysis Server, que é uma ferramenta de análise estática de código Dart.
+
+Seguindo a documentação oficial do pacote, foi então iniciado o desenvolvimento de uma prova de conceito. Para isso, foi então criado um novo projeto em Dart utilizando o template de pacote. Esse template estrutura um projeto Dart com uma base ideal para o desenvolvimento de um pacote que possa ser posteriormente publicado no repositório \href{https://pub.dev}{pub.dev}.
+
+Para tal é necessário executar o seguinte comando: \texttt{dart create -t package-simple <nome\_do\_projeto>} que após a execuçaõ, irá gerar uma estrutura similar a apresentada a seguir:
+
+\begin{verbatim}
+<nome_do_projeto>
+	CHANGELOG.md
+	README.md
+	analysis_options.yaml
+	example/
+		<nome_do_projeto>_example.dart
+	lib/
+		<nome_do_projeto>.dart
+		src/
+			<nome_do_projeto>_base.dart
+	pubspec.lock
+	pubspec.yaml
+	test/
+		<nome_do_projeto>_test.dart
+\end{verbatim}
+
+Com o projeto base criado, é então necessário adicionar as dependências necessárias para o desenvolvimento do plugin. Para isso, foi necessário executar o seguinte comando: \texttt{dart pub add analyzer\_plugin analyzer} que irá adicionar a dependência do pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin} e do pacote \href{https://pub.dev/packages/analyzer}{analyzer} ao arquivo \texttt{pubspec.yaml}. Ambos são pacotes oficiais do time do Dart.
+
+Seguindo então a documentação do \cite{documentacaoanalyzerplugin} foi possível chegar em uma implementação capaz de avaliar código fonte escrito em Dart e retornar as regras de acessibilidade que não foram seguidas. Entretanto a falta de suporte da equipe para com o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin} fez com que a implementação fosse abandonada. 
+
+As principais dificuldades encontradas foram: 
+
+\begin{itemize}
+	\item Falta de documentação: A documentação oficial do pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin} é escassa e não cobre todos os aspectos necessários para o desenvolvimento de um plugin para Dart.
+	\item Falta de suporte: A equipe do Dart não fornece suporte para o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin}, o que torna difícil encontrar soluções para problemas específicos.
+	\item Complexidade: O pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin} é complexo e requer um conhecimento avançado de Dart e análise estática de código para ser utilizado corretamente.
+	\item Falta de integração: O pacote não é capaz de integrar com o analisador padrão do Dart, o que dificulta a implementação de regras de acessibilidade personalizadas. Necessitando que o desenvolvedor que consuma o pacote tenha de executar uma série de comandos para que o plugin funcione corretamente.
+\end{itemize}
+
+\subsubsection{Plugin para Dart utilizando o pacote \href{https://pub.dev/packages/custom_lint_builder}{custom\_lint\_builder}}
+
+Após a tentativa frustrada de utilizar o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin}, foi então decidido utilizar o pacote \href{https://pub.dev/packages/custom_lint_builder}{custom\_lint\_builder} para criar um plugin para Dart. Apesar de ele necessitar que o usuário final importe o pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint} no seu projeto, utilize arquivos diferentes para a personalização de regras de acessibilidade, e também necessitar de uma interface de linha de comando própria, sendo incompatível com o comando \texttt{dart analyze} do Dart, ele é atualmente a melhor opção para a criação de um plugin "linter" para Dart.

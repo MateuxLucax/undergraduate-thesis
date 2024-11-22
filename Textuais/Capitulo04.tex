@@ -356,12 +356,10 @@ Seguindo a documentação oficial da Apple \cite{iosaccessibility} e do Google \
 		Regra de Acessibilidade & Descrição \\
 		\hline
 		\refstepcounter{ra}\thera\label{ra:tooltip} & Utilize rótulos descritivos para todos os elementos interativos \\
-		\refstepcounter{ra}\thera & Forneça descrições de texto alternativas para imagens e outros elementos não textuais \\
-		\refstepcounter{ra}\thera & Forneça feedback visual e auditivo para todas as interações do usuário \\
-		\refstepcounter{ra}\thera & Forneça uma maneira de ignorar ou pular conteúdo repetitivo \\
-		\refstepcounter{ra}\thera & Forneça uma maneira de aumentar o tamanho do texto e do conteúdo \\
-		\refstepcounter{ra}\thera & Forneça uma maneira de navegar facilmente pelo conteúdo \\
+		\refstepcounter{ra}\thera & Forneça descrições de texto alternativas para imagens, botões, e outros elementos não textuais \\
+		\refstepcounter{ra}\thera & Forneça feedback visual, auditivo ou tátil para todas as interações do usuário \\
 		\refstepcounter{ra}\thera & Elementos interativos devem possuir um mínimo de 48pt de largura e altura \\
+		\refstepcounter{ra}\thera & Forneça um contraste mínimo de 4.5:1 entre o texto e o plano de fundo \\
 		\hline
 	\end{tabular}
 	\vspace{2mm}
@@ -418,7 +416,34 @@ Para exemplificar como desenvolver uma regra de acessibilidade utilizando o paco
 
 No Flutter, seguindo sua documentação oficial \cite{flutter} podemos notar que em elementos como o \texttt{IconButton} é possível adicionar um \texttt{tooltip} que é exibido quando o usuário passa o mouse sobre o elemento. Esse \texttt{tooltip} é um rótulo descritivo que descreve a função do elemento interativo.
 
-\pagebreak
+O objetivo final está disposto na figura \ref{fig:exemplo-codigo-fonte-tooltip} onde é possível visualizar que a IDE marca o código fonte e sugere correções automáticas quando um \texttt{IconButton} não possui um \texttt{tooltip}.
+
+\begin{figure}[!ht]
+	\centering
+	\caption{Exemplo de código fonte com a regra de acessibilidade \ref{ra:tooltip} não seguida com a IDE marcando o código fonte}\label{fig:exemplo-codigo-fonte-tooltip}
+	\includegraphics[width=425pt]{Assets/PrintIDEAviso.png}
+	\fonte{\me{2024}}
+\end{figure}
+
+Também podemos visualizar na figura \ref{fig:exemplo-correcao-automatica-tooltip} que a IDE sugere correções automáticas para a regra de acessibilidade \ref{ra:tooltip}. E ao aceitar a correção automática, o \texttt{tooltip} é adicionado ao \texttt{IconButton} bastando o desenvolvedor adicionar o texto da descrição do elemento interativo.
+
+\begin{figure}[!ht]
+	\centering
+	\caption{Exemplo de correção automática para a regra de acessibilidade \ref{ra:tooltip}}\label{fig:exemplo-correcao-automatica-tooltip}
+	\includegraphics[width=425pt]{Assets/PrintIDECorrecao.png}
+	\fonte{\me{2024}}
+\end{figure}
+
+Também visando a possibilidade de utilização em ambientes de integração continua, na figura \ref{fig:exmplo-comando-erro} é possível visualizar a execução do comando \seqsplit{dart run custom\_lint} que analisa o código fonte do projeto e retorna as regras de acessibilidade que não foram seguidas.
+
+\begin{figure}[!ht]
+	\centering
+	\caption{Exemplo da execução do comando \texttt{dart run custom\_lint}}\label{fig:exmplo-comando-erro}
+	\includegraphics[width=425pt]{Assets/PrintComandoCustomLint.png}
+	\fonte{\me{2024}}
+\end{figure}
+
+Dessa forma é possível garantir que sempre que um desenvolvedor adicione um \seqsplit{IconButton} em sua aplicação desenvolvida com Flutter, ele seja obrigado a adicionar um \seqsplit{tooltip} que descreva a função do elemento interativo, tornando a aplicação mais acessível a todos os usuários.
 
 \subsection{Estruturando o Projeto}
 
@@ -448,15 +473,48 @@ Para implementar a regra de acessibilidade \ref{ra:tooltip}: Utilize rótulos de
 	\fonte{\me{2024}}
 \end{table}
 
-Com a estrutura da tabela \ref{tab:estrutura-diretorios-arquivos-ra1} pronta, podemos partir para a implementação de tal regra. O objetivo final está disposto na imagem X e Y, onde é possível visualizar que a IDE marca o código fonte e sugere correções automáticas quando um \texttt{IconButton} não possui um \texttt{tooltip}.
-
-\subsection{Implementando a Regra de Acessibilidade}
-
-Para implementar a regra de acessibilidade, iremos primeiro alterar o arquivo \seqsplit{avoid\_icon\_button\_without\_tooltip\_rule\_rule.dart} para registrar a regra de acessibilidade e verificar se um \texttt{IconButton} possui um \texttt{tooltip}. A figura \ref{fig:avoid-icon-button-without-tooltip-rule-rule} apresenta o código fonte. Em seguida será destacado cada passo da implementação para melhor compreensão.
+Com a estrutura da tabela \ref{tab:estrutura-diretorios-arquivos-ra1} pronta, podemos partir para a implementação de tal regra. 
+Com a estrutura definida, precisamos alterar o arquivo inicial do projeto \seqsplit{accessibility\_lint.dart} para registrar a regra de acessibilidade e verificar se um \texttt{IconButton} possui um \texttt{tooltip}. A figura \ref{fig:accessibility-lint} apresenta o código fonte.
 
 \begin{figure}[!htbp]
 \centering
-\caption{Código fonte do arquivo avoid\_icon\_button\_without\_tooltip\_rule\_rule.dart}\label{fig:avoid-icon-button-without-tooltip-rule-rule}
+\caption{Código fonte do arquivo accessibility\_lint.dart}\label{fig:accessibility-lint}
+\begin{lstlisting}
+import 'package:custom_lint_builder/custom_lint_builder.dart';
+
+import 'src/rules/avoid_icon_button_without_tooltip/....dart';
+
+PluginBase createPlugin() => _AccessibilityLintPlugin();
+
+class _AccessibilityLintPlugin extends PluginBase {
+	@override
+	List<LintRule> getLintRules(
+		final CustomLintConfigs configs,
+	) =>
+			<LintRule>[
+				const AvoidIconButtonWithoutTooltipRule(),
+			];
+}		
+\end{lstlisting}
+\vspace{2mm}
+\fonte{\me{2024}}
+\end{figure}
+
+Para criar um plugin para o pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint}, é necessário criar uma classe que estende \texttt{PluginBase} e sobrescrever o método \texttt{getLintRules} para retornar uma lista de regras de acessibilidade. Na linha 5 da figura \ref{fig:accessibility-lint}, é definido um método \texttt{createPlugin} que retorna uma instância da classe \texttt{\_AccessibilityLintPlugin}. Na linha 9 sobrescrevemos o método \texttt{getLintRules} para retornar uma lista de regras de acessibilidade, que no caso é a regra de acessibilidade \seqsplit{AvoidIconButtonWithoutTooltipRule} que será implementada na próxima seção.
+
+\subsection{Implementando a Regra de Acessibilidade}
+
+Para implementar a regra de acessibilidade, iremos primeiro alterar o arquivo \seqsplit{avoid\_icon\_button\_without\_tooltip\_rule\_rule.dart} para registrar a regra de acessibilidade e verificar se um \texttt{IconButton} possui um \texttt{tooltip}. A figura \ref{fig:avoid-icon-button-without-tooltip-rule} apresenta o código fonte. Em seguida será destacado cada passo da implementação para melhor compreensão.
+
+Para criar uma regra de \texttt{lint} utilizando o pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint}, é criar uma estender a classe \texttt{DartLintRule}, assim como é possível visualizar na linha 7 da figura \ref{fig:avoid-icon-button-without-tooltip-rule}. Também é necessário sobrescrever o método \texttt{run} para registrar a regra de acessibilidade e tornar visível para o pacote.
+
+Nas linhas 10 a 14 da figura \ref{fig:avoid-icon-button-without-tooltip-rule}, é definido os textos que irão retornar ao usuário caso a regra de acessibilidade não seja seguida. Ela é um objeto da class e \texttt{LintCode} que recebe o nome da regra, a mensagem de problema e a mensagem de correção. Nela definimos na linha 11 que o nome da regra é "\seqsplit{avoid\_icon\_button\_without\_tooltip}", na linha 12 a mensagem de problema é "\texttt{Avoid using IconButton without a tooltip.}", na linha 13 a mensagem de correção é "\texttt{Specify a tooltip for the IconButton widget.}" e por fim na linha 14 definimos o nível de severidade do erro como \texttt{WARNING} pois a regra de acessibilidade não é um erro de compilação.
+
+Com essa definição básica especificada, agora precisamos efetivamente construir o código que irá fazer a validação de tal regra \cite{customlintbuilder}. Usualmente, aplicações em Flutter, possuem um esquema de definição declarativa de interface no qual as propriedades de um "Widget" são passadas como argumentos para o construtor do mesmo.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Código fonte do arquivo avoid\_icon\_button\_without\_tooltip\_rule.dart}\label{fig:avoid-icon-button-without-tooltip-rule}
 \begin{lstlisting}
 import 'package:analyzer_dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
@@ -471,6 +529,7 @@ class AvoidIconButtonWithoutTooltipRule extends DartLintRule {
 		name: 'avoid_icon_button_without_tooltip',
 		problemMessage: 'Avoid using IconButton without a tooltip.',
 		correctionMessage: 'Specify a tooltip for the IconButton widget.',
+		errorSeverity: ErrorSeverity.WARNING,
 	);
 
 	@override
@@ -487,20 +546,19 @@ class AvoidIconButtonWithoutTooltipRule extends DartLintRule {
 			if (constructorName != 'IconButton') return;
 
 			bool hasTooltip = false;
-			for (final Expression argument in node.argumentList.arguments) {
-				if (argument is NamedExpression) {
-					final String name = argument.name.label.name;
+      for (final Expression argument in node.argumentList.arguments) {
+        if (argument is! NamedExpression) continue;
+        final String name = argument.name.label.name;
 
-					if (name == 'tooltip') {
-						hasTooltip = true;
-						break;
-					}
-				}
-			}
+        if (name != 'tooltip') continue;
 
-			if (!hasTooltip) {
-				reporter.atNode(node, _code);
-			}
+        hasTooltip = true;
+        break;
+      }
+
+      if (hasTooltip) return;
+
+      reporter.atNode(node, _code);
 		});
 	}
 
@@ -510,4 +568,163 @@ class AvoidIconButtonWithoutTooltipRule extends DartLintRule {
 \end{lstlisting}
 \vspace{2mm}
 \fonte{\me{2024}}
+\end{figure}
+
+Para verificar se um \texttt{IconButton} possui um \texttt{tooltip}, é necessário verificar se o construtor do \texttt{IconButton} possui um argumento chamado \texttt{tooltip}. Para isso, é necessário percorrer a lista de argumentos do construtor e verificar se existe um argumento chamado \texttt{tooltip}. Uma vez que o pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint} não fornece uma maneira de acessar o código fonte do construtor, é necessário utilizar a API do pacote \href{https://pub.dev/packages/analyzer}{analyzer}. Ela fornece uma árvore de sintaxe abstrata \cite{compiladores} que representa o código fonte do arquivo analisado e permite acessar os elementos do código fonte, como construtores, argumentos e propriedades.
+
+O primeiro passo é realizado na linha 25, onde definimos uma variável \seqsplit{constructorName} que recebe o nome do construtor do nó da árvore que está sendo visitado naquele momento. Para facilitar a compreensão de como a árvore é construída, é possível visualizar a figura \ref{fig:flutter-component-tree}.
+
+\begin{figure}[!htbp]
+	\centering
+	\caption{Árvore de componentes de um código fonte Dart}
+	\label{fig:flutter-component-tree}
+	\includegraphics[width=325pt]{Assets/FlutterComponentTree.png}
+	\fonte{\me{2024}}
+\end{figure}
+
+Uma vez que estamos apenas interessados no construtor do \texttt{IconButton}, é necessário verificar se o nome do construtor é igual a \texttt{IconButton}. Isso é feito na linha 27, onde verificamos se o nome do construtor é diferente de \texttt{IconButton}. Caso não seja, a regra de acessibilidade não é aplicada e a execução já retorna na mesma linha.
+
+Com a certeza de que o nó é um \texttt{IconButton}, agora é necessário verificar se ele já possui o atributo \texttt{tooltip} conforme definido na documentação do Flutter \cite{flutter}. Para isso, é necessário percorrer a lista de argumentos do construtor e verificar se o argumento está sendo utilizado. Com isso, na linha 30 é iniciado um laço de repetição que percorre a lista de argumentos do construtor. Tais argumentos possuem o tipo \texttt{Expression} e é necessário verificar se ele é um \texttt{NamedExpression} que é um argumento nomeado. Caso não seja, a execução retorna na linha 31. Se o nome desse argumento nomeado não for \texttt{tooltip}, a execução retorna na linha 33. Caso contrário, a variável \texttt{hasTooltip} é definida como verdadeira e a execução do laço de repetição se encerra.
+
+Haja vista que a regra de acessibilidade é aplicada apenas quando um \texttt{IconButton} não possui um \texttt{tooltip}, é necessário verificar o estado da variável \texttt{hasTooltip}. Em caso de estar definida como verdadeira, a execução retorna na linha 35. Caso contrário, a regra de acessibilidade é aplicada e a mensagem de problema é reportada na linha 37.
+
+Com isso, temos a primeira regra de acessibilidade implementada. A próxima etapa é implementar a regra de correção automática que irá sugerir a adição de um \texttt{tooltip} para o \texttt{IconButton}.
+
+\subsection{Implementando a Correção Automática}
+
+Para implementar a regra de correção automática, iremos alterar o arquivo \seqsplit{avoid\_icon\_button\_without\_tooltip\_rule\_fix.dart} para sugerir a adição de um \texttt{tooltip} para o \texttt{IconButton}. A figura \ref{fig:avoid-icon-button-without-tooltip-rule-fix} apresenta o código fonte.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Código fonte do arquivo avoid\_icon\_button\_without\_tooltip\_fix.dart}\label{fig:avoid-icon-button-without-tooltip-rule-fix}
+\begin{lstlisting}
+class AvoidIconButtonWithoutTooltipFix extends DartFix {
+	@override
+	void run(
+		final CustomLintResolver resolver,
+		final ChangeReporter reporter,
+		final CustomLintContext context,
+		final AnalysisError analysisError,
+		final List<AnalysisError> others,
+	) {
+		context.registry.addInstanceCreationExpression(
+			(final InstanceCreationExpression node) {
+				if (!analysisError.sourceRange.intersects(node.sourceRange)) {
+					return;
+				}
+
+				final String constructorName = node.constructorName.type.toString();
+				if (constructorName != 'IconButton') return;
+
+				bool haveCommaBeforeEndToken = false;
+				if (node.endToken.previous?.lexeme == ',') {
+					haveCommaBeforeEndToken = true;
+				}
+
+				reporter
+					.createChangeBuilder(
+						message: 'Add tooltip property',
+						priority: 0,
+					).addDartFileEdit((
+						final DartFileEditBuilder builder,
+					) {
+						final int offset = node.endToken.offset - 1;
+
+						builder.addInsertion(
+							offset,
+							(final DartEditBuilder builder) {
+								if (haveCommaBeforeEndToken) {
+									builder.write(" tooltip: '");
+								} else {
+									builder.write(", tooltip: '");
+								}
+
+								builder..selectHere()..writeln("',");
+							},
+						);
+					},
+				);
+			},
+		);
+	}
+}
+\end{lstlisting}
+\vspace{2mm}
+\fonte{\me{2024}}
+\end{figure}
+
+Assim como na figura \ref{fig:avoid-icon-button-without-tooltip-rule}, a etapa inicial, seguindo a documentação \cite{customlintbuilder} é estender uma classe do pacote utilizado na criação do plugin. Nesse caso, é a classe \texttt{DartFix} que é utilizada para implementar regras de correção automática. Na linha 1 da figura \ref{fig:avoid-icon-button-without-tooltip-rule-fix}, é definida a classe \seqsplit{AvoidIconButtonWithoutTooltipFix} que estende a classe \texttt{DartFix}. O único método que precisa ser implementado é o método \texttt{run} que é chamado quando a regra de acessibilidade é violada.
+
+A etapa inicial, como definida na na linha 12, é verificar se o erro de análise está contido no nó da árvore que está sendo visitado. Caso não esteja, a execução retorna na linha 13. Em seguida, é verificado se o nó é um \texttt{IconButton} na linha 16. Caso não seja, a execução retorna na linha 17.
+
+Uma vez que o nó é um \texttt{IconButton}, é necessário verificar se o último token do nó é uma vírgula. Isso é necessário para garantir que a correção automática seja aplicada corretamente. Caso o último token do nó seja uma vírgula, a variável \texttt{haveCommaBeforeEndToken} é definida como verdadeira na linha 21. Caso contrário, a variável é definida como falsa na linha 19.
+
+Com a verificação concluída, é possível sugerir a correção automática para adicionar um \texttt{tooltip} para o \texttt{IconButton}. Para isso, é necessário criar um novo \texttt{ChangeBuilder} na linha 25 que irá adicionar um novo \texttt{DartFileEdit} na linha 26. O \texttt{DartFileEdit} é responsável por adicionar a correção automática ao código fonte. Como podemos ver na documentação do \cite{customlintbuilder}, nele é necessário informar o offset (posição) onde a correção automática será aplicada e o texto que será inserido. Uma vez que o \texttt{tooltip} é um argumento nomeado, podemos adicionar ele no final do nó, porem, atrás do último token do nó que é o \texttt{)} utilizado para fechar o construtor. Vamos utilizar a variável \texttt{haveCommaBeforeEndToken} para verificar se é necessário adicionar uma vírgula antes do \texttt{tooltip}. Caso seja necessário, a vírgula é adicionada na linha 37. Caso contrário, a vírgula é adicionada na linha 39. Em seguida, o \texttt{tooltip} é adicionado na linha 36 e a correção automática é aplicada.
+
+Para finalizar, basta agora utilizar o \texttt{builder} para posicionar o cursor da IDE na posição necessária para ele apenas escrever a descrição, e então adicionar ao final o \texttt{'} para fechar a string e a vírgula para fechar o argumento nomeado.
+
+Com isso, a regra de acessibilidade \ref{ra:tooltip} foi implementada com sucesso. A próxima etapa é testar a regra de acessibilidade em uma aplicação desenvolvida com Flutter e verificar se a correção automática é sugerida quando um \texttt{IconButton} não possui um \texttt{tooltip}.
+
+\section{Testes}
+
+Para testar a regra de acessibilidade \ref{ra:tooltip}, foi criada uma aplicação de exemplo que possui um \texttt{IconButton} sem um \texttt{tooltip}. A figura \ref{fig:exemplo-codigo-fonte-tooltip} apresenta o código fonte da aplicação de exemplo. Ela já foi apresentada anteriormente na seção de Provas de Conceito. Também na figura \ref{fig:exemplo-correcao-automatica-tooltip} é possível visualizar a correção automática sugerida pela IDE. E por último, para validar a possibilidade de utilização em ambientes de integração continua, na figura \ref{fig:exmplo-comando-erro} é possível visualizar a execução do comando \seqsplit{dart run custom\_lint} que analisa o código fonte do projeto e retorna as regras de acessibilidade que não foram seguidas.
+
+\subsection{Testes Automatizados}
+
+Por se tratar de um pacote com funcionalidades diferente do usual, a equipe desenvolvedora do pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint} fornece uma técnica de testes automatizados conforme em sua documentação \cite{customlintbuilder} através de comentários em trechos de código com a anotação \texttt{@lint}...
+
+\section{Publicando o Pacote no \href{https://pub.dev/}{pub.dev}}
+
+Para tornar possível que outros desenvolvedores utilizem o pacote, podemos publica-lo no \href{https://pub.dev/}{pub.dev}. Seguindo a documentação oficial \cite{pubdotdevpublish}, é necessário criar uma conta no \href{https://pub.dev/}{pub.dev} como publicador de pacotes. Com a conta criada, no projeto criado basta executar o comando \seqsplit{dart pub publish} para publicar o pacote. As informações do pacote como nome, versão, descrição, etc, são definidas no arquivo \seqsplit{pubspec.yaml}. Na figura \ref{fig:pubspec-yaml} é possível visualizar o arquivo \seqsplit{pubspec.yaml} do pacote criado.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Código fonte do arquivo pubspec.yaml}\label{fig:pubspec-yaml}
+\begin{lstlisting}
+name: accessibility_lint
+description: This package provides a handful of lint rules to help and guide you through your development of mobile applications.
+version: 0.0.1
+repository: https://github.com/MateuxLucax/accessibility-lint
+issue_tracker: https://github.com/MateuxLucax/accessibility-lint/issues
+
+environment:
+  sdk: ^3.5.0
+
+platforms:
+  android:
+  ios:
+
+dependencies:
+  analyzer: ^6.7.0
+  custom_lint_builder: ^0.7.0
+  analyzer_plugin: ^0.11.3
+
+dev_dependencies:
+  lints: ^5.0.0
+\end{lstlisting}
+\vspace{2mm}
+\fonte{\me{2024}}
+\end{figure}
+
+Com o pacote publicado, ele estará disponível para ser utilizado por outros desenvolvedores através do comando \texttt{flutter pub add --dev custom\_lint accessibility\_lint}. O comando irá adicionar o pacote ao arquivo \seqsplit{pubspec.yaml} do projeto e instalar o pacote em modo de desenvolvimento no projeto que o desenvolvedor adicionar. Ademais, o desenvolvedor precisará adicionar a configuração do pacote no arquivo \texttt{analysis\_options.yaml} do projeto. Na figura \ref{fig:analysis-options-yaml} é possível visualizar o arquivo \texttt{analysis\_options.yaml} do projeto.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Código fonte necessário no analysis\_options.yaml}\label{fig:analysis-options-yaml}
+\begin{lstlisting}
+analyzer:
+plugins:
+	- custom_lint	
+\end{lstlisting}
+\vspace{2mm}
+\fonte{\me{2024}}
+\end{figure}
+
+Na figura \ref{fig:pacote-publicado-pub-dev} é possível visualizar o pacote \href{https://pub.dev/packages/accessibility_lint}{accessibility\_lint} publicado no \href{https://pub.dev/}{pub.dev}. Nele, o desenvolvedor pode ter uma visão geral do projeto, e também instruções e exemplos de utilização. Ademais, é possível visualizar os caminhos para o repositório público do código hospedado no \href{https://github.com/MateuxLucax/accessibility-lint}{GitHub} e para o rastreador de problemas. Com isso, é possível que outros desenvolvedores proporcionem feedbacks e sugestões para melhorar o pacote.
+
+\begin{figure}[!ht]
+	\centering
+	\caption{Pacote \href{https://pub.dev/packages/accessibility_lint}{accessibility\_lint} publicaod}\label{fig:pacote-publicado-pub-dev}
+	\includegraphics[width=400pt]{Assets/PacotePublicadoPubDev.png}
+	\fonte{\me{2024}}
 \end{figure}

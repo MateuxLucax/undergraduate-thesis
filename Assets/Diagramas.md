@@ -1,6 +1,4 @@
-# Diagramas de Sequência
-
-## Diagrama de Sequência - Análise de Código
+# Diagramas
 
 ```mermaid
 sequenceDiagram
@@ -20,8 +18,6 @@ sequenceDiagram
     IDE ->> Desenvolvedor: Exibe análise
 ```
 
-## Diagrama de Sequência - Interação plugin -> Regras de Acessibilidade
-
 ```mermaid
 sequenceDiagram
     autonumber
@@ -38,8 +34,6 @@ sequenceDiagram
     Plugin ->> LSP: Retorna análise
 ```
 
-## Digrama de Sequência - Plugin -> CI/CD
-
 ```mermaid
 sequenceDiagram
     autonumber
@@ -54,11 +48,6 @@ sequenceDiagram
     Plugin ->> Pipeline: Retorna análise
     Pipeline ->> Pipeline: Quebra o build caso existam erros
 ```
-
-
-# Diagrama de Componentes
-
-## Diagrama de Componentes - Plugin
 
 ```mermaid
 graph TD
@@ -85,4 +74,17 @@ sequenceDiagram
     Plugin ->> LSP: Retorna análise
     LSP ->> IDE: Retorna análise
     IDE ->> Desenvolvedor: Exibe análise
+```
+
+```mermaid
+graph TD
+    A[Material App] --> B[Scaffold]
+    B --> C[AppBar]
+    B --> D[Body]
+    D --> E[Column]
+    E --> F[Text]
+    E --> G[IconButton]
+    G --> H[Icon]
+    B --> I[FloatingActionButton]
+    B --> J[Footer]
 ```

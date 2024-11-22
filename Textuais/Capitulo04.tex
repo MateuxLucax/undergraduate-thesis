@@ -129,7 +129,7 @@ Diagramas de sequência são diagramas de interação que mostram como grupos de
 
 O diagrama de sequência da figura \ref{fig:diagrama-sequencia-plugin} a seguir ilustra a interação básica do desenvolvedor com o plugin:
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\caption{Interação do desenvolvedor com o plugin}\label{fig:diagrama-sequencia-plugin}
 	\includegraphics[width=325pt]{Assets/DiagramaSequenciaIDELSPPlugin.png}
@@ -140,7 +140,7 @@ Como podemos ver na figura \ref{fig:diagrama-sequencia-plugin}, o desenvolvedor 
 
 Entretanto o diagrama da figura \ref{fig:diagrama-sequencia-plugin} não mostra a interação do plugin com as regras de acessibilidade, para isso foi criado o diagrama de sequência da figura \ref{fig:diagrama-sequencia-regra-acessibilidade}:
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \centering
   \caption{Interação do plugin com as regras de acessibilidade}\label{fig:diagrama-sequencia-regra-acessibilidade}
   \includegraphics[width=325pt]{Assets/DiagramaPluginRegrasAcessibilidade.png}
@@ -151,7 +151,7 @@ Como é possível identificar na figura \ref{fig:diagrama-sequencia-regra-acessi
 
 Um dos requisitos é ser possível utilizar o plugin através de uma linha de comando possibilitando integração com ambientes de integração contínua, para isso foi criado o diagrama de sequência da figura \ref{fig:diagrama-sequencia-linha-comando}:
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\caption{Interação do plugin com a linha de comando}\label{fig:diagrama-sequencia-linha-comando}
 	\includegraphics[width=325pt]{Assets/DiagramaSequenciaLinhaComando.png}
@@ -180,24 +180,36 @@ Haja vista que o projeto visava criar um plugin agnóstico de IDE porém ainda c
 
 Seguindo a documentação oficial do pacote, foi então iniciado o desenvolvimento de uma prova de conceito. Para isso, foi então criado um novo projeto em Dart utilizando o template de pacote. Esse template estrutura um projeto Dart com uma base ideal para o desenvolvimento de um pacote que possa ser posteriormente publicado no repositório \href{https://pub.dev}{pub.dev}.
 
-Para tal é necessário executar o seguinte comando: \texttt{dart create -t package-simple <nome\_do\_projeto>} que após a execuçaõ, irá gerar uma estrutura similar a apresentada a seguir:
+Para tal é necessário executar o seguinte comando: \texttt{dart create -t package-simple <nome\_do\_projeto>} que após a execuçaõ, irá gerar uma estrutura similar a apresentada na tabela \ref{tab:estrutura-projeto-dart}.
 
-\begin{verbatim}
-<nome_do_projeto>
-	CHANGELOG.md
-	README.md
-	analysis_options.yaml
-	example/
-		<nome_do_projeto>_example.dart
-	lib/
-		<nome_do_projeto>.dart
-		src/
-			<nome_do_projeto>_base.dart
-	pubspec.lock
-	pubspec.yaml
-	test/
-		<nome_do_projeto>_test.dart
-\end{verbatim}
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Estrutura de um projeto Dart utilizando o template de pacote}
+	\label{tab:estrutura-projeto-dart}
+	\ttfamily
+	\begin{tabular}{ L{12cm} }
+		\hline
+		<nome\_do\_projeto> \\
+		|--CHANGELOG.md \\
+		|-- README.md \\
+		|-- analysis\_options.yaml \\
+		|-- example/ \\
+		|---- <nome\_do\_projeto>\_example.dart \\
+		|-- lib/ \\
+		|---- <nome\_do\_projeto>.dart \\
+		|---- src/ \\
+		|------ <nome\_do\_projeto>\_base.dart \\
+		|-- pubspec.lock \\
+		|-- pubspec.yaml \\
+		|-- test/ \\
+		|---- <nome\_do\_projeto>\_test.dart \\
+		\hline
+	\end{tabular}
+	\fontfamily{\rmdefault}\selectfont
+	\vspace{2mm}
+	\fonte{\me{2024}}
+\end{table}
 
 Com o projeto base criado, é então necessário adicionar as dependências necessárias para o desenvolvimento do plugin. Para isso, foi necessário executar o seguinte comando: \texttt{dart pub add analyzer\_plugin analyzer} que irá adicionar a dependência do pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin} e do pacote \href{https://pub.dev/packages/analyzer}{analyzer} ao arquivo \texttt{pubspec.yaml}. Ambos são pacotes oficiais do time do Dart.
 
@@ -214,4 +226,288 @@ As principais dificuldades encontradas foram:
 
 \subsubsection{Plugin para Dart utilizando o pacote \href{https://pub.dev/packages/custom_lint_builder}{custom\_lint\_builder}}
 
-Após a tentativa frustrada de utilizar o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin}, foi então decidido utilizar o pacote \href{https://pub.dev/packages/custom_lint_builder}{custom\_lint\_builder} para criar um plugin para Dart. Apesar de ele necessitar que o usuário final importe o pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint} no seu projeto, utilize arquivos diferentes para a personalização de regras de acessibilidade, e também necessitar de uma interface de linha de comando própria, sendo incompatível com o comando \texttt{dart analyze} do Dart, ele é atualmente a melhor opção para a criação de um plugin "linter" para Dart.
+Após a tentativa frustrada de utilizar o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin}, foi então decidido utilizar o pacote \href{https://pub.dev/packages/custom_lint_builder}{custom\_lint\_builder} para criar um plugin para Dart. Apesar de ele necessitar que o usuário final importe o pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint} no seu projeto, utilize arquivos diferentes para a personalização de regras de acessibilidade, e também necessitar de uma interface de linha de comando própria, sendo incompatível com o comando \texttt{dart analyze} do Dart, ele é atualmente a melhor opção para a criação de um plugin "linter" para Dart. Porém ele ainda possuí um problema que não é simples de resolver sem envolver o time de desenvolvimento do Dart, ele não é capaz de integrar com comandos como \texttt{dart analyze} e \texttt{dart format}. Entretanto, não existe alternativa viável para a criação de um plugin "linter" para Dart que atenda esse requisito. 
+
+Tal pacote se mostrou mais simples de utilizar e mais bem documentado que o pacote \href{https://pub.dev/packages/analyzer_plugin}{analyzer\_plugin}. Além disso, ele é capaz de integrar com o analisador padrão do Dart, o que facilita a implementação de regras de acessibilidade personalizadas. 
+
+Para executar em um ambiente de integrado contínua, basta executar o comando \texttt{dart run custom\_lint} que irá analisar o código fonte do projeto e retornar as regras de acessibilidade que não foram seguidas, com um comportamento similar ao comando \texttt{dart analyze} do Dart.
+
+\section{Mapeamento Sistemático da Literatura}
+
+Com a conclusão da etapa de Modelagem e provas de conceito, a próxima etapa é o Mapeamento Sistemático da Literatura, onde serão identificadas as regras de acessibilidade mais utilizadas e criado um conjunto de regras de acessibilidade padrão.
+
+\subsection{Protocolo de Pesquisa}
+
+Como protocolo de pesquisa para a realização do Mapeamento Sistemático da Literatura, foi utilizado o descrito no apêndice 1 do relatório técnico de \cite{srufrj}. A partir dele, as etapas serão condensadas em: Definição do Problema, Questões de Pesquisa, Seleção de Bases de Dados, Critérios de Inclusão e Exclusão, Seleção de Estudos e Síntese dos Dados.
+
+\subsubsection{Questões de Pesquisa}
+
+\begin{itemize}
+	\item QP1: Quais são as regras de acessibilidade mais utilizadas em móveis?
+	\item QP2: Existe um conjunto de regras de acessibilidade padrão para aplicações móveis?
+	\item QP3: Como as regras de acessibilidade são aplicadas em aplicações móveis?
+	\item QP4: Quais são as ferramentas mais utilizadas para aplicar regras de acessibilidade em aplicações móveis?
+\end{itemize}
+
+\subsubsection{Seleção de Bases de Dados}
+
+Para o levantamento de dados de uma forma mais automatizada através da utilização de ferramentas de busca com suporte a consultas estruturadas, foi decidido utilizar as seguintes bases de dados:
+
+\begin{itemize}
+	\item \href{https://ieeexplore.ieee.org/}{IEEE Xplore}
+	\item \href{https://dl.acm.org/}{ACM Digital Library}
+	\item \href{https://scholar.google.com/}{Google Scholar}
+\end{itemize}
+
+Como \texttt{string} de busca após algumas iterações para melhor ajuste, foi definida a presente na tabela \ref{tab:strings-de-busca}. Ela foi utilizada para realizar a busca nas bases de dados selecionadas.
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Strings de busca}
+	\label{tab:strings-de-busca}
+	\begin{tabular}{ L{12cm} }
+		\hline
+		("mobile development" OR "mobile app*") AND ("accessibility" OR "accessible design" OR "inclusive design" OR "digital inclusion") AND ("tool*" OR "guidelines" OR "legislation" OR "legal" OR "requirements" OR "compliance" OR "challenges" OR "demand") AND NOT("W3C" OR "web") \\
+		\hline
+	\end{tabular}
+	\vspace{2mm}
+	\fonte{\me{2023}}
+\end{table}
+
+Foi utilizado a lingua inglesa para a busca, uma vez que a maioria dos artigos científicos estão escritos nessa língua. Além disso, foi definido o período de 2010 a 2023 para a busca, uma vez que a acessibilidade em aplicações móveis é um tema relativamente novo e a maioria dos artigos científicos sobre o assunto foram publicados nesse período.
+
+\subsubsection{Critérios de Inclusão e Exclusão}
+
+Os critérios de inclusão e exclusão foram definidos para garantir que apenas os artigos relevantes para o tema da pesquisa fossem selecionados. Os critérios de inclusão e exclusão são apresentados na tabela \ref{tab:criterios-inclusao-exclusao}.
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Critérios de inclusão e exclusão}
+	\label{tab:criterios-inclusao-exclusao}
+	\begin{tabular}{ L{12cm} }
+		\hline
+		Critérios de Inclusão \\
+		\hline
+		Artigos que abordam o tema da acessibilidade em aplicações móveis \\
+		Artigos publicados entre 2010 e 2023 \\
+		Artigos escritos em inglês \\
+		Artigos disponíveis gratuitamente \\
+		Regras de acessibilidade aplicáveis em aplicações móveis \\
+		\hline
+		Critérios de Exclusão \\
+		\hline
+		Artigos que não abordam o tema da acessibilidade em aplicações móveis \\
+		Artigos publicados antes de 2010 ou após 2023 \\
+		Artigos escritos em outro idioma que não o inglês \\
+		Artigos pagos \\
+		Regras de acessibilidade não aplicáveis em aplicações móveis \\
+		\hline
+	\end{tabular}
+	\vspace{2mm}
+	\fonte{\me{2023}}
+\end{table}
+
+\subsubsection{Seleção de Estudos}
+
+Com as bases de dados selecionadas e os critérios de inclusão e exclusão definidos, foi possível realizar a busca e selecionar os estudos relevantes para a pesquisa. A busca foi realizada utilizando a \texttt{string} de busca definida anteriormente na tabela \ref{tab:strings-de-busca} e os critérios de inclusão e exclusão definidos na tabela \ref{tab:criterios-inclusao-exclusao}.
+
+Os resultados da busca obtidos estão destacados na tabela \ref{tab:quantidade-de-estudos}.
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Quantidade de estudos encontrados}
+	\label{tab:quantidade-de-estudos}
+	\begin{tabular}{ L{4cm}  L{2cm}  L{2cm}  L{2cm}  L{3cm} }
+		\hline
+		Base de Dados & Total de Estudos & Estudos Incluídos & Estudos Excluídos & Estudos Selecionados \\
+		\hline
+		IEEE Xplore & 247 & 17 & 230 & 0 \\
+		ACM Digital Library & 32 & 12 & 20 & 0 \\
+		Google Scholar & 17700 & 7 & 17693 & 0 \\
+		\hline
+	\end{tabular}
+	\vspace{2mm}
+	\fonte{\me{2023}}
+\end{table}
+
+\subsubsection{Síntese dos Dados}
+
+Talvez devido a \texttt{string} de busca utilizada, não foi possível encontrar estudos relevantes para a pesquisa. Alguns artigos como o de \cite{mobileaccessibilityguidelinesadpotion} foram encontrados e pelo seu resumo pareciam ser relevantes para a pesquisa, porém não estavam disponíveis gratuitamente. Esse foi na realidade um dos maiores desafios encontrados durante a realização do Mapeamento Sistemático da Literatura, a falta de acesso a artigos científicos relevantes para a pesquisa.
+
+Com isso, foi necessário uma mudança na abordagem do projeto, uma vez que não foi possível identificar um conjunto de regras de acessibilidade padrão para aplicações móveis. A nova abordagem consiste em criar um conjunto de regras de acessibilidade baseado nas recomendações de ambas as plataformas.
+
+\section{Regras de Acessibilidade}
+
+Seguindo a documentação oficial da Apple \cite{iosaccessibility} e do Google \cite{androidaccessibility}, foi possível identificar um conjunto de regras de acessibilidade que são comuns a ambas as plataformas. Essas regras de acessibilidade serão utilizadas como base para a criação de um conjunto de regras de acessibilidade padrão para aplicações móveis desenvolvidas com Flutter. Podemos visualizar ela na tabela \ref{tab:regras-acessibilidade}.
+
+\newcounter{ra} 
+\renewcommand{\thera}{RA\arabic{ra}}
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Regras de acessibilidade baseadas nas recomendações de ambas as plataformas}
+	\label{tab:regras-acessibilidade}
+	\begin{tabular}{ R{4cm}  L{10cm} }
+		\hline
+		Regra de Acessibilidade & Descrição \\
+		\hline
+		\refstepcounter{ra}\thera\label{ra:tooltip} & Utilize rótulos descritivos para todos os elementos interativos \\
+		\refstepcounter{ra}\thera & Forneça descrições de texto alternativas para imagens e outros elementos não textuais \\
+		\refstepcounter{ra}\thera & Forneça feedback visual e auditivo para todas as interações do usuário \\
+		\refstepcounter{ra}\thera & Forneça uma maneira de ignorar ou pular conteúdo repetitivo \\
+		\refstepcounter{ra}\thera & Forneça uma maneira de aumentar o tamanho do texto e do conteúdo \\
+		\refstepcounter{ra}\thera & Forneça uma maneira de navegar facilmente pelo conteúdo \\
+		\refstepcounter{ra}\thera & Elementos interativos devem possuir um mínimo de 48pt de largura e altura \\
+		\hline
+	\end{tabular}
+	\vspace{2mm}
+	\fonte{\me{2024}}
+\end{table}
+
+Tais regras de acessibilidade serão utilizadas como base para a criação de um conjunto de regras de acessibilidade padrão para aplicações móveis desenvolvidas com Flutter. Elas serão aplicadas ao código fonte da aplicação desenvolvida com Flutter e o plugin irá marcar o código fonte e sugerir correções automáticas caso uma inconsistência seja encontrada.
+
+\section{Projeto}
+
+Com a conclusão da etapa de Mapeamento Sistemático da Literatura, a próxima etapa é o Projeto, onde será projetada a arquitetura de integração com o Flutter e selecionados os frameworks, bibliotecas e linguagens que serão usados no desenvolvimento da ferramenta.
+
+\subsection{Arquitetura de Integração com o Flutter}
+
+A arquitetura de integração com o Flutter foi projetada para ser simples e eficiente, permitindo que o plugin seja utilizado em qualquer IDE que suporte LSP. A arquitetura é composta por três componentes principais: o LSP, o Plugin e o Dart Analysis Server.
+
+Como descrito na seção de Provas de Conceito, foi escolhido o pacote \href{https://pub.dev/packages/custom_lint_builder}{custom\_lint\_builder} para criar um plugin para Dart.
+
+Seguindo sua documentação \cite{customlintbuilder}, foi possível criar uma estrutura de diretórios e arquivos que permite a criação de regras de acessibilidade personalizadas e a integração com o analisador padrão do Dart. Ela está disposta na tabela  \ref{tab:estrutura-diretorios-arquivos}.
+
+Uma regra de \texttt{lint} utilizando o pacote usualmente necessita de uma classe que estende \texttt{LintRule} e sobrescreve o método \texttt{register} para registrar a regra de acessibilidade. Ademais, podemos definir regras de correção automática criando uma nova classe que estende \texttt{DartFix}. Mais detalhes sobre como implementar serão descritos na próxima seção com um exemplo prático com uma das regras de acessibilidade implementadas.
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Estrutura de diretórios e arquivos do projeto}
+	\label{tab:estrutura-diretorios-arquivos}
+	\ttfamily
+	\begin{tabular}{ L{12cm} }
+		\hline
+		<projeto> \\
+		|-- analysis\_options.yaml \\
+		|-- lib/ \\
+		|---- <nome\_do\_projeto>.dart \\
+		|---- rules/ \\
+		|------ <nome\_da\_regra>/ \\
+		|-------- <nome\_da\_regra>\_rule.dart \\
+		|-------- <nome\_da\_regra>\_fix.dart \\
+		|-- pubspec.yaml \\
+		\hline
+	\end{tabular}
+	\fontfamily{\rmdefault}\selectfont
+	\vspace{2mm}
+	\fonte{\me{2024}}
+\end{table}
+
+Com a estrutura da tabela \ref{tab:estrutura-diretorios-arquivos}, é possível escalar de forma simples e eficiente a criação de regras de acessibilidade personalizadas e a integração com o analisador do pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint}. Pode ser resumido a criação de uma nova pasta dentro de \texttt{rules} com o nome da regra de acessibilidade.
+
+O principal objetivo é permitir que outros desenvolvedores possam ampliar o conjunto de regras de acessibilidade padrão para aplicações móveis desenvolvidas com Flutter, garantindo que todas as aplicações desenvolvidas com Flutter sejam acessíveis a todos os usuários.
+
+\section{Desenvolvendo uma Regra de Acessibilidade}
+
+Para exemplificar como desenvolver uma regra de acessibilidade utilizando o pacote \href{https://pub.dev/packages/custom_lint}{custom\_lint}, foi escolhida a regra de acessibilidade \ref{ra:tooltip}: Utilize rótulos descritivos para todos os elementos interativos. Essa regra de acessibilidade é comum a ambas as plataformas e é uma das regras de acessibilidade mais utilizadas em aplicações móveis.
+
+No Flutter, seguindo sua documentação oficial \cite{flutter} podemos notar que em elementos como o \texttt{IconButton} é possível adicionar um \texttt{tooltip} que é exibido quando o usuário passa o mouse sobre o elemento. Esse \texttt{tooltip} é um rótulo descritivo que descreve a função do elemento interativo.
+
+\pagebreak
+
+\subsection{Estruturando o Projeto}
+
+Para implementar a regra de acessibilidade \ref{ra:tooltip}: Utilize rótulos descritivos para todos os elementos interativos, foi criada a seguinte estrutura de diretórios e arquivos:
+
+\begin{table}[!htbp]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Estrutura de diretórios e arquivos para a regra de acessibilidade \ref{ra:tooltip}}
+	\label{tab:estrutura-diretorios-arquivos-ra1}
+	\ttfamily
+	\begin{tabular}{ L{12cm} }
+		\hline
+		accessibility\_lint \\
+		|-- analysis\_options.yaml \\
+		|-- lib/ \\
+		|---- accessibility\_lint.dart \\
+		|---- rules/ \\
+		|------ avoid\_icon\_button\_without\_tooltip\_rule/ \\
+		|-------- avoid\_icon\_button\_without\_tooltip\_rule\_rule.dart \\
+		|-------- avoid\_icon\_button\_without\_tooltip\_rule\_fix.dart \\
+		|-- pubspec.yaml \\
+		\hline
+	\end{tabular}
+	\fontfamily{\rmdefault}\selectfont
+	\vspace{2mm}
+	\fonte{\me{2024}}
+\end{table}
+
+Com a estrutura da tabela \ref{tab:estrutura-diretorios-arquivos-ra1} pronta, podemos partir para a implementação de tal regra. O objetivo final está disposto na imagem X e Y, onde é possível visualizar que a IDE marca o código fonte e sugere correções automáticas quando um \texttt{IconButton} não possui um \texttt{tooltip}.
+
+\subsection{Implementando a Regra de Acessibilidade}
+
+Para implementar a regra de acessibilidade, iremos primeiro alterar o arquivo \seqsplit{avoid\_icon\_button\_without\_tooltip\_rule\_rule.dart} para registrar a regra de acessibilidade e verificar se um \texttt{IconButton} possui um \texttt{tooltip}. A figura \ref{fig:avoid-icon-button-without-tooltip-rule-rule} apresenta o código fonte. Em seguida será destacado cada passo da implementação para melhor compreensão.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Código fonte do arquivo avoid\_icon\_button\_without\_tooltip\_rule\_rule.dart}\label{fig:avoid-icon-button-without-tooltip-rule-rule}
+\begin{lstlisting}
+import 'package:analyzer_dart/ast/ast.dart';
+import 'package:analyzer/error/listener.dart';
+import 'package:custom_lint_builder/custom_lint_builder.dart';
+
+import 'avoid_icon_button_without_tooltip_fix.dart';
+
+class AvoidIconButtonWithoutTooltipRule extends DartLintRule {
+	const AvoidIconButtonWithoutTooltipRule() : super(code: _code);
+
+	static const LintCode _code = LintCode(
+		name: 'avoid_icon_button_without_tooltip',
+		problemMessage: 'Avoid using IconButton without a tooltip.',
+		correctionMessage: 'Specify a tooltip for the IconButton widget.',
+	);
+
+	@override
+	void run(
+		final CustomLintResolver resolver,
+		final ErrorReporter reporter,
+		final CustomLintContext context,
+	) {
+		context.registry.addInstanceCreationExpression((
+			final InstanceCreationExpression node,
+		) {
+			final String constructorName = node.constructorName.type.toString();
+
+			if (constructorName != 'IconButton') return;
+
+			bool hasTooltip = false;
+			for (final Expression argument in node.argumentList.arguments) {
+				if (argument is NamedExpression) {
+					final String name = argument.name.label.name;
+
+					if (name == 'tooltip') {
+						hasTooltip = true;
+						break;
+					}
+				}
+			}
+
+			if (!hasTooltip) {
+				reporter.atNode(node, _code);
+			}
+		});
+	}
+
+	@override
+	List<Fix> getFixes() => <Fix>[AvoidIconButtonWithoutTooltipFix()];
+}
+\end{lstlisting}
+\vspace{2mm}
+\fonte{\me{2024}}
+\end{figure}

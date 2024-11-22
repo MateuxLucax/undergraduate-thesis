@@ -62,9 +62,27 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    A[Plugin] --> B[Regras de Acessibilidade]
-    A --> C[Análise de Código]
-    A --> D[Configurações]
-    A --> E[Interface Gráfica]
-    A --> F[API]
+    A[IDE] --> B[LSP]
+    B --> C[Plugin]
+    C --> D[Dart Analysis Server]
+    C --> B
+    B --> A
+```
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Desenvolvedor as Desenvolvedor
+    participant IDE as IDE
+    participant LSP as Language Server Protocol
+    participant Plugin as Plugin
+
+    Desenvolvedor ->> IDE: Escreve código
+    IDE ->> LSP: Solicita análise
+    LSP ->> Plugin: Solicita análise
+    Plugin ->> Plugin: Verifica código
+    Plugin ->> Plugin: Valida regras de acessibilidade
+    Plugin ->> LSP: Retorna análise
+    LSP ->> IDE: Retorna análise
+    IDE ->> Desenvolvedor: Exibe análise
 ```

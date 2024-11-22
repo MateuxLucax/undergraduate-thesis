@@ -9,6 +9,7 @@
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{1, 1, 1}
+\definecolor{codeyellow}{rgb}{0.6,0.6,0}
 
 % Define the codebox
 \lstset{
@@ -28,19 +29,14 @@
 	showstringspaces=false,
 	showtabs=false,                  
 	tabsize=2,
-	morestring=*[d]{"}
-	%frame=shadowbox
-}   
-
-% Define the code emph rules
-\lstset{
-	% Types
-	emph=[1]{var, String, int, List, void, Future, await, if, else, throw, async, true, false, Map, AnalysisDriverGeneric},% Insert here the types you are using
+	morestring=*[d]{"},
+	breakatwhitespace=true,
+	breaklines=true,
+	frame=shadowbox,
+	emph=[1]{var, String, int, List, void, Future, await, if, else, throw, async, true, false, Map, AnalysisDriverGeneric, static, const, class, extends, import, for, final, in, return},
 	emphstyle=[1]{\color{codepurple}},
-	% Functions
-	emph=[2]{findAllElements,findElements, setState, send, fromPath, add, parse, bytesToString},% Insert here the methods you are using
-	emphstyle=[2]{\color{magenta}}%
-  % Language keywords
-  emph=[3]{import, export, class, extends, with, implements, get, set, new, final, static, const, abstract, super, this, return, for, while, do, switch, case, break, continue, default, in, is, as, try, catch, finally, on, rethrow, assert, enum, typedef, yield, async, await, sync, sync*} % Insert here the keywords you are using
-  emphstyle=[3]{\color{blue}}%
+	emph=[2]{findAllElements,findElements, setState, send, fromPath, add, parse, bytesToString}, % Functions
+	emphstyle=[2]{\color{magenta}},
+	emph=[3]{AvoidIconButtonWithoutTooltipRule, DartLintRule, LintCode, CustomLintResolver, ErrorReporter, CustomLintContext, Expression, InstanceCreationExpression, NamedExpression, Fix, AvoidIconButtonWithoutTooltipFix}, % Variables
+	emphstyle=[3]{\color{codeyellow}} 
 }

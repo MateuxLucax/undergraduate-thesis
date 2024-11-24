@@ -1,4 +1,4 @@
-\chapter{Desenvolvimento}
+\chapter{Desenvolvimento}\label{sec:desenvolvimento}
 
 Esta seção tem como objetivo apresentar o processo de desenvolvimento da proposta atual, fundamentado nas etapas previamente descritas na seção de metodologia. Serão discutidos também os desafios encontrados durante o processo e possíveis ajustes na direção do projeto à medida que obstáculos emergem.
 
@@ -26,7 +26,7 @@ As Regras de Negócio (RN), por sua vez, são diretrizes que definem ou restring
 
 Em suma, a identificação e compreensão desses três elementos - RF, RNF e RN - são cruciais para o sucesso do desenvolvimento do sistema, garantindo que ele seja construído de acordo com as necessidades do negócio e dos usuários, além de cumprir com os critérios de qualidade estabelecidos.
 
-\subsection{Requisitos Funcionais}
+\subsection{Requisitos Funcionais}\label{sec:requisitos-funcionais}
 
 Os Requisitos Funcionais (RF) identificados para o sistema proposto são:
 
@@ -42,16 +42,13 @@ Os Requisitos Funcionais (RF) identificados para o sistema proposto são:
 		\hline
 		Requisito & Descrição \\
 		\hline
-		\refstepcounter{rf}\therf	& O sistema deve analisar código escrito na linguagem Dart \\
-    \refstepcounter{rf}\therf	& O sistema deve possuir requisitos não funcionais voltados a acessibilidade \\
-    \refstepcounter{rf}\therf	& O sistema deve permitir a visualização de inconsistências no código \\
-    \refstepcounter{rf}\therf	& O sistema deve realizar marcações no código baseado na especificação definida \\
-    \refstepcounter{rf}\therf	& O sistema deve sugerir remover trechos de código baseado na especificação definida \\
-    \refstepcounter{rf}\therf	& O sistema deve sugerir correções automáticas baseado na especificação definida \\
-    \refstepcounter{rf}\therf	& O sistema deve permitir o usuário consultar todas as baseado os requisitos não funcionais de acessibilidade \\
-    \refstepcounter{rf}\therf	& O sistema deve permitir o usuário desabilitar requisitos não funcionais de acessibilidade \\
-    \refstepcounter{rf}\therf	& O sistema deve permitir a utilização em ambientes de integração contínua \\
-
+		\refstepcounter{rf}\therf\label{req:visualizar-inconsistencia}	& O sistema deve permitir a visualização de inconsistências no código \\
+    \refstepcounter{rf}\therf\label{req:marcar-inconsistencia}	& O sistema deve realizar marcações no código baseado na especificação definida \\
+    \refstepcounter{rf}\therf\label{req:sugerir-remover-inconsistencia}	& O sistema deve sugerir remover trechos de código baseado na especificação definida \\
+    \refstepcounter{rf}\therf\label{req:sugerir-correcao-automatica} & O sistema deve sugerir correções automáticas baseado na especificação definida \\
+    \refstepcounter{rf}\therf\label{req:consultar-requisitos} & O sistema deve permitir o usuário consultar todas as baseado os requisitos não funcionais de acessibilidade \\
+    \refstepcounter{rf}\therf\label{req:desabilitar-requisitos} & O sistema deve permitir o usuário desabilitar requisitos não funcionais de acessibilidade \\
+    \refstepcounter{rf}\therf\label{req:linha-comando} & O sistema deve permitir a utilização em ambientes de integração contínua \\
 		\hline
 	\end{tabular}
 	\vspace{2mm}
@@ -60,7 +57,7 @@ Os Requisitos Funcionais (RF) identificados para o sistema proposto são:
 
 Dos requisitos funcionais da tabela \ref{tab:tabela-requisitos-funcionais}, destaca-se a necessidade de analisar código escrito na linguagem Dart, isso depende de uma ferramenta capaz de processar e interpretar o código fonte da aplicação desenvolvida com Flutter. A equipe do Dart provê uma API para análise estática de código, que será utilizada através do plugin \href{https://pub.dev/packages/analyzer}{analyzer}. Ele já provê uma interface para acessar a árvore sintática abstrata do código fonte, que será utilizada para identificar e marcar as inconsistências no código.
 
-\subsection{Requisitos Não Funcionais}
+\subsection{Requisitos Não Funcionais}\label{sec:requisitos-nao-funcionais}
 
 Os Requisitos Não Funcionais (RNF) identificados para o sistema proposto são:
 
@@ -76,11 +73,11 @@ Os Requisitos Não Funcionais (RNF) identificados para o sistema proposto são:
 		\hline
 		Requisito & Descrição \\
 		\hline
-		\refstepcounter{rnf}\thernf	& O sistema deve ser escrito utilizando a linguagem Dart \\
-		\refstepcounter{rnf}\thernf	& O sistema deve ser publicado no repositório \href{https:\\pub.dev}{pub.dev} \\
-		\refstepcounter{rnf}\thernf	& O sistema deve seguir as melhores práticas para pacotes publicados no repositório \href{https:\\pub.dev}{pub.dev} \\
-    \refstepcounter{rnf}\thernf	& O sistema deve possuir licença aberta para permitir alterações e melhorias \\
-    \refstepcounter{rnf}\thernf	& O sistema deve possuir documentação para auxiliar na criação de novas regras de negócio de usabilidade \\
+		\refstepcounter{rnf}\thernf\label{rnf:utiliza-dart}	& O sistema deve ser escrito utilizando a linguagem Dart \\
+		\refstepcounter{rnf}\thernf\label{rnf:pub-dev}	& O sistema deve ser publicado no repositório \href{https:\\pub.dev}{pub.dev} \\
+		\refstepcounter{rnf}\thernf\label{rnf:melhores-praticas}	& O sistema deve seguir as melhores práticas para pacotes publicados no repositório \href{https:\\pub.dev}{pub.dev} \\
+    \refstepcounter{rnf}\thernf\label{rnf:licenca-aberta}	& O sistema deve possuir licença aberta para permitir alterações e melhorias \\
+    \refstepcounter{rnf}\thernf\label{rnf:documentacao}	& O sistema deve possuir documentação para auxiliar na criação de novas regras de negócio de usabilidade \\
 		\hline
 	\end{tabular}
 	\vspace{2mm}
@@ -89,7 +86,7 @@ Os Requisitos Não Funcionais (RNF) identificados para o sistema proposto são:
 
 Dos requisitos funcionais descritos na tabela \ref{tab:tabela-requisitos-nao-funcionais}, destaca-se a necessidade de seguir as melhores práticas para pacotes publicados no repositório \href{https:\\pub.dev}{pub.dev}. Isso é importante para garantir que o sistema seja facilmente acessível e utilizável por outros desenvolvedores, além de manter a qualidade e a segurança do código fonte. A equipe do Dart provê um guia de boas práticas para publicação de pacotes no repositório \href{https:\\pub.dev}{pub.dev}, que será seguido para garantir a qualidade e a segurança do sistema. Ele também é uma das formas que o repositório classifica plugins auxiliando na escolha dos usuários.
 
-\subsection{Regras de Negócio}
+\subsection{Regras de Negócio}\label{sec:regras-negocio}
 
 As Regras de Negócio (RN) identificadas para o sistema proposto são:
 
@@ -232,7 +229,7 @@ Tal pacote se mostrou mais simples de utilizar e mais bem documentado que o paco
 
 Para executar em um ambiente de integrado contínua, basta executar o comando \texttt{dart run custom\_lint} que irá analisar o código fonte do projeto e retornar as regras de acessibilidade que não foram seguidas, com um comportamento similar ao comando \texttt{dart analyze} do Dart.
 
-\section{Mapeamento Sistemático da Literatura}
+\section{Mapeamento Sistemático da Literatura}\label{sec:msl}
 
 Com a conclusão da etapa de Modelagem e provas de conceito, a próxima etapa é o Mapeamento Sistemático da Literatura, onde serão identificadas as regras de acessibilidade mais utilizadas e criado um conjunto de regras de acessibilidade padrão.
 
@@ -339,7 +336,7 @@ Talvez devido a \texttt{string} de busca utilizada, não foi possível encontrar
 
 Com isso, foi necessário uma mudança na abordagem do projeto, uma vez que não foi possível identificar um conjunto de regras de acessibilidade padrão para aplicações móveis. A nova abordagem consiste em criar um conjunto de regras de acessibilidade baseado nas recomendações de ambas as plataformas.
 
-\section{Regras de Acessibilidade}
+\section{Regras de Acessibilidade}\label{sec:regras-acessibilidade}
 
 Seguindo a documentação oficial da Apple \cite{iosaccessibility} e do Google \cite{androidaccessibility}, foi possível identificar um conjunto de regras de acessibilidade que são comuns a ambas as plataformas. Essas regras de acessibilidade serão utilizadas como base para a criação de um conjunto de regras de acessibilidade padrão para aplicações móveis desenvolvidas com Flutter. Podemos visualizar ela na tabela \ref{tab:regras-acessibilidade}.
 
@@ -356,10 +353,10 @@ Seguindo a documentação oficial da Apple \cite{iosaccessibility} e do Google \
 		Regra de Acessibilidade & Descrição \\
 		\hline
 		\refstepcounter{ra}\thera\label{ra:tooltip} & Utilize rótulos descritivos para todos os elementos interativos \\
-		\refstepcounter{ra}\thera & Forneça descrições de texto alternativas para imagens, botões, e outros elementos não textuais \\
-		\refstepcounter{ra}\thera & Forneça feedback visual, auditivo ou tátil para todas as interações do usuário \\
-		\refstepcounter{ra}\thera & Elementos interativos devem possuir um mínimo de 48pt de largura e altura \\
-		\refstepcounter{ra}\thera & Forneça um contraste mínimo de 4.5:1 entre o texto e o plano de fundo \\
+		\refstepcounter{ra}\thera\label{ra:descricao-imagens} & Forneça descrições de texto alternativas para imagens \\
+		\refstepcounter{ra}\thera\label{ra:feedback-visual} & Forneça feedback visual, auditivo ou tátil para todas as interações do usuário \\
+		\refstepcounter{ra}\thera\label{ra:largura-minima} & Elementos interativos devem possuir um mínimo de 48pt de largura e altura \\
+		\refstepcounter{ra}\thera\label{ra:contraste-minimo} & Forneça um contraste mínimo de 4.5:1 entre o texto e o plano de fundo \\
 		\hline
 	\end{tabular}
 	\vspace{2mm}
@@ -720,11 +717,6 @@ analyzer:
 \fonte{\me{2024}}
 \end{figure}
 
-Na figura \ref{fig:pacote-publicado-pub-dev} é possível visualizar o pacote \href{https://pub.dev/packages/accessibility_lint}{accessibility\_lint} publicado no \href{https://pub.dev/}{pub.dev}. Nele, o desenvolvedor pode ter uma visão geral do projeto, e também instruções e exemplos de utilização. Ademais, é possível visualizar os caminhos para o repositório público do código hospedado no \href{https://github.com/MateuxLucax/accessibility-lint}{GitHub} e para o rastreador de problemas. Com isso, é possível que outros desenvolvedores proporcionem feedbacks e sugestões para melhorar o pacote.
+\pagebreak
 
-\begin{figure}[!ht]
-	\centering
-	\caption{Pacote \href{https://pub.dev/packages/accessibility_lint}{accessibility\_lint} publicado no \href{https://pub.dev}{pub.dev}}\label{fig:pacote-publicado-pub-dev}
-	\includegraphics[width=400pt]{Assets/PacotePublicadoPubDev.png}
-	\fonte{\me{2024}}
-\end{figure}
+Na figura \ref{fig:pacote-publicado-pub-dev} é possível visualizar o pacote \href{https://pub.dev/packages/accessibility_lint}{accessibility\_lint} publicado no \href{https://pub.dev/}{pub.dev}. Nele, o desenvolvedor pode ter uma visão geral do projeto, e também instruções e exemplos de utilização. Ademais, é possível visualizar os caminhos para o repositório público do código hospedado no \href{https://github.com/MateuxLucax/accessibility-lint}{GitHub} e para o rastreador de problemas. Com isso, é possível que outros desenvolvedores proporcionem feedbacks e sugestões para melhorar o pacote.

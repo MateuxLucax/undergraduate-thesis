@@ -27,7 +27,7 @@ Sendo assim, é simples compreender a importância e benefícios da acessibilida
 \begin{figure}[!h]
 	\centering
 	\caption{"Maçanetas pivotantes (à esquerda) só requerem um leve empurrão por cima. Maçanetas esféricas (à direita) necessitam de um movimento de torção com firmeza.”}
-	\includegraphics[width=256pt]{Assets/Macanetas pivotantes.png}
+	\includegraphics[width=320pt]{Assets/Macanetas pivotantes.png}
 	\fonte{\cite[p. 11]{kalbag2017}}
 \end{figure}
 
@@ -45,13 +45,19 @@ O Capítulo II da LBI descreve quais os direitos de pessoas com deficiência. E 
 
 Além da LBI, o Brasil conta com outras legislações voltadas à inclusão digital e à garantia dos direitos das pessoas com deficiência. Dentre elas, destacam-se o \cite{decreto5296}, que regulamenta as Leis nº 10.048 e 10.098 e estabelece normas e critérios para a promoção de acessibilidade das pessoas com deficiência, e a Lei Nº 12.965 \cite{lei12965}, mais conhecida como Marco Civil da Internet, que estabelece princípios, garantias, direitos e deveres para o uso da Internet no Brasil.
 
-\subsection{Acessibilidade Digital}
-
 \subsection{Estado da Acessibilidade Digital}
 
 A acessibilidade digital é um conceito que se refere à capacidade de pessoas com deficiência ou mobilidade reduzida de acessar e interagir com conteúdos, aplicativos e serviços digitais. Ela abrange uma ampla gama de tecnologias e práticas que visam tornar a experiência digital mais inclusiva e acessível a todos os usuários, independentemente de suas limitações.
 
-Em uma pesquisa realizada por (adicionar iaap etc)
+Em uma pesquisa realizada por \cite{iaap}, os principais desafios na adição de acessibilidade no processo de desenvolvimento conforme a figura \ref{fig:desafios-acessibilidade-iaap} é a dificuldade na incorporação de acessibilidade nos estágios iniciais do desenvolvimento de software, tempo para implementar ou corrigir acessibilidade, treinamento e conhecimento das melhores prática e acesso a testadores que possuam deficiência. O curioso é que o orçamento é colocado como um dos menores desafios, o que pode ser um indicativo de que a acessibilidade é algo que empresas reconhecem como importante e estão dispostas a investir.
+
+\begin{figure}[!ht]
+	\centering
+	\caption{Pensando especificamente na sua função no trabalho, quais desafios o seu programa de acessibilidade enfrenta?}
+	\includegraphics[width=350pt]{Assets/IAAPDesafios.png}
+	\label{fig:desafios-acessibilidade-iaap}
+	\fonte{\cite[p. 16]{iaap}}
+\end{figure}
 
 \section{Flutter}
 
@@ -75,12 +81,26 @@ A construção de uma Árvore Sintática Abstrata (AST, do inglês Abstract Synt
 
 Com base nesses princípios, a AST e a análise estática são amplamente utilizadas não apenas em compiladores tradicionais, mas também em ferramentas modernas, como linters e otimizadores de código. Essas ferramentas aproveitam a representação abstrata fornecida pela AST para realizar diagnósticos e aplicar melhorias, garantindo que o código esteja em conformidade com padrões estabelecidos e otimizado para execução.
 
-Com uma AST é possível fazer a análise necessária para validar regras de acessibilidade em qualquer linguagem. Para o presente trabalho, a AST será utilizada para analisar o código fonte de aplicações móveis desenvolvidas com Flutter e identificar possíveis violações de regras de acessibilidade e boas práticas de desenvolvimento móvel.
+\pagebreak
+
+\begin{figure}[!ht]
+	\centering
+  \caption[Código intermediário]{Exemplo de código intermediário \footnotemark}
+	\includegraphics[width=350pt]{Assets/ExemploCompiladoresArvore.png}
+	\label{fig:arvore-compiladores}
+	\fonte{\cite[p. 26]{compiladores}}
+\end{figure}
+
+\footnote[1]{`\texttt{do i = i + 1; while ( a[i] < v; )}`.}
+
+Como é possível ver na figura \ref{fig:arvore-compiladores} e descrito em \cite{compiladores} um laço de repetição é representado com um nó raiz do tipo "do-while", onde seu corpo e sua condição de parada são filhos. Os filhos do corpo é a operação de adição que está sendo realizada. Já os filhos da condição de parada representa a comparação entre o valor de um vetor e uma variável. Com isso é possível torar um código fonte e transformá-lo em uma representação mais abstrata e fácil de ser manipulada na forma de árvore.
 
 \section{Mapeamento Sistemático da Literatura}
 
-O Mapeamento Sistemático da Literatura (MSL) é uma técnica de pesquisa que visa identificar, avaliar e interpretar as evidências disponíveis em um determinado campo de estudo.
+O Mapeamento Sistemático da Literatura (MSL) é uma técnica de pesquisa que visa identificar, avaliar e interpretar as evidências disponíveis em um determinado campo de estudo. Para \cite{srufrj}, o MSL é uma abordagem sistemática e rigorosa que permite mapear e analisar a literatura existente sobre um tema específico, identificando tendências, lacunas e oportunidades de pesquisa. Ao contrário de uma busca não ordenada e aleatória por informações em diferentes livros, testes, artigos e outros documentos.
 
-\section{Testes Automatizados}
+Uma das principais vantagens da utilização do MSL é a possibilidade de filtrar e sintetizar um grande volume de informações, para \cite{researchsynthesis} o beneficio cresce em função do número de documentos de um tópico. Além disso, com as ferramentas que hoje existem como IEEE Xplore, Scopus, Web of Science, Google Scholar, entre outros, é possível realizar buscas mais precisas e abrangentes, garantindo que todas as fontes relevantes sejam consideradas.
 
-Adicionar conteúdo, e importancia
+Porém, conforme é destacado por \cite{srufrj} uma das principais limitações do MSL é a dependência da qualidade e da disponibilidade das fontes de informação. Se as fontes de informação não forem confiáveis ou não estiverem disponíveis, o MSL pode ser comprometido. Além disso, a seleção de critérios de inclusão e exclusão pode ser subjetiva e influenciar os resultados do MSL. Ademais, o realizador da pesquisa pode ser influenciado por um conhecimento maior sobre o tópico e acabar por não considerar fontes relevantes.
+
+Diferentes metodologias e protocolos podem ser utilizados para conduzir um MSL, dependendo do objetivo da pesquisa e do campo de estudo. No entanto, a maioria dos MSLs segue uma estrutura semelhante, que envolve as seguintes etapas: definição da questão de pesquisa, seleção de fontes de informação, definição de critérios de inclusão e exclusão, extração de dados, análise dos resultados e apresentação dos achados.

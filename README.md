@@ -19,3 +19,7 @@ of more inclusive applications.
 You can read the full thesis [here](./Trabalho%20de%20Conclusão%20de%20Curso.pdf) (in Portuguese).
 
 The LaTeX model used in the thesis is available [here](https://www.udesc.br/bu/manuais/modelo)
+
+---
+
+The source code is available at [github.com/MateuxLucax/accessibility-lint](https://github.com/MateuxLucax/accessibility-lint)

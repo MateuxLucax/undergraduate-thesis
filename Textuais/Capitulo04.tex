@@ -177,7 +177,7 @@ Haja vista que o projeto visava criar um plugin agnóstico de IDE porém ainda c
 
 Seguindo a documentação oficial do pacote, foi então iniciado o desenvolvimento de uma prova de conceito. Para isso, foi então criado um novo projeto em Dart utilizando o template de pacote. Esse template estrutura um projeto Dart com uma base ideal para o desenvolvimento de um pacote que possa ser posteriormente publicado no repositório \href{https://pub.dev}{pub.dev}.
 
-Para tal é necessário executar o seguinte comando: \texttt{dart create -t package-simple <nome\_do\_projeto>} que após a execuçaõ, irá gerar uma estrutura similar a apresentada na tabela \ref{tab:estrutura-projeto-dart}.
+Para tal é necessário executar o seguinte comando: \texttt{dart create -t package-simple <nome\_do\_projeto>} que após a execução, irá gerar uma estrutura similar a apresentada na tabela \ref{tab:estrutura-projeto-dart}.
 
 \begin{table}[!htbp]
 	\centering
@@ -243,7 +243,6 @@ Como protocolo de pesquisa para a realização do Mapeamento Sistemático da Lit
 	\item QP1: Quais são as regras de acessibilidade mais utilizadas em móveis?
 	\item QP2: Existe um conjunto de regras de acessibilidade padrão para aplicações móveis?
 	\item QP3: Como as regras de acessibilidade são aplicadas em aplicações móveis?
-	\item QP4: Quais são as ferramentas mais utilizadas para aplicar regras de acessibilidade em aplicações móveis?
 \end{itemize}
 
 \subsubsection{Seleção de Bases de Dados}
@@ -321,24 +320,26 @@ Os resultados da busca obtidos estão destacados na tabela \ref{tab:quantidade-d
 		\hline
 		Base de Dados & Total de Estudos & Estudos Incluídos & Estudos Excluídos & Estudos Selecionados \\
 		\hline
-		IEEE Xplore & 247 & 17 & 230 & 0 \\
-		ACM Digital Library & 32 & 12 & 20 & 0 \\
-		Google Scholar & 17700 & 7 & 17693 & 0 \\
+		IEEE Xplore & 247 & 17 & 230 & 2 \\
+		ACM Digital Library & 32 & 12 & 20 & 3 \\
+		Google Scholar & 17700 & 7 & 17693 & 2 \\
 		\hline
 	\end{tabular}
 	\vspace{2mm}
-	\fonte{\me{2023}}
+	\fonte{\me{2024}}
 \end{table}
 
-\subsubsection{Síntese dos Dados}
+\subsubsection{Síntese dos Dados}\label{sec:sintese-dados}
 
-Talvez devido a \texttt{string} de busca utilizada, não foi possível encontrar estudos relevantes para a pesquisa. Alguns artigos como o de \cite{mobileaccessibilityguidelinesadpotion} foram encontrados e pelo seu resumo pareciam ser relevantes para a pesquisa, porém não estavam disponíveis gratuitamente. Esse foi na realidade um dos maiores desafios encontrados durante a realização do Mapeamento Sistemático da Literatura, a falta de acesso a artigos científicos relevantes para a pesquisa.
+Com os trabalhos selecionados, foi possível identificar um conjunto comum de regras de acessibilidade juntamente as definidas pelas plataformas Apple \cite{iosaccessibility} e Google \cite{androidaccessibility}. As regras de acessibilidade identificadas estão apresentadas na tabela \ref{tab:regras-acessibilidade}.
 
-Com isso, foi necessário uma mudança na abordagem do projeto, uma vez que não foi possível identificar um conjunto de regras de acessibilidade padrão para aplicações móveis. A nova abordagem consiste em criar um conjunto de regras de acessibilidade baseado nas recomendações de ambas as plataformas.
+Porém um fato importante a ser destacado é que a maioria dos artigos relevantes para a pesquisa não estavam disponíveis gratuitamente, o que dificultou a realização do Mapeamento Sistemático da Literatura. Além disso, a falta de acesso a artigos científicos relevantes para a pesquisa fez com que não fosse possível identificar um conjunto de regras de acessibilidade padrão para aplicações móveis. Isso pode ser fruto da \texttt{string} de busca utilizada, que pode não ter sido a mais adequada para a pesquisa.
 
 \section{Regras de Acessibilidade}\label{sec:regras-acessibilidade}
 
-Seguindo a documentação oficial da Apple \cite{iosaccessibility} e do Google \cite{androidaccessibility}, foi possível identificar um conjunto de regras de acessibilidade que são comuns a ambas as plataformas. Essas regras de acessibilidade serão utilizadas como base para a criação de um conjunto de regras de acessibilidade padrão para aplicações móveis desenvolvidas com Flutter. Podemos visualizar ela na tabela \ref{tab:regras-acessibilidade}.
+Seguindo a documentação oficial da Apple \cite[p. ~312]{iosaccessibility}, Google \cite{androidaccessibility} e dos trabalhos selecionados na seção \ref{sec:sintese-dados} do Mapeamento Sistemático da Literatura realizado, foi possível identificar um conjunto de regras de acessibilidade que são comuns a ambas as plataformas. Essas regras de acessibilidade serão utilizadas como base para a criação de um conjunto de regras de acessibilidade padrão para aplicações móveis desenvolvidas com Flutter. Podemos visualizar ela na tabela \ref{tab:regras-acessibilidade}.
+
+O trabalho realizado por \cite{studyofaccessibilityguidelinesofmobileapplications} levantou quais as principais violações de acessibilidade em um conjunto de aplicativos selecionados para testes, e nele é possível identificar houveram 25 violações da regra de falta de texto alternativo para imagens e 29 violações da regra de falta de rótulos descritivos para elementos interativos. Para tal, a regra de acessibilidade \ref{ra:tooltip} e \ref{ra:descricao-imagens} foram escolhidas para serem implementadas no projeto tornando assim, um requisito aplicações móveis desenvolvidas com Flutter possuírem uma descrição alternativa para imagens e rótulos descritivos para elementos interativos.
 
 \newcounter{ra} 
 \renewcommand{\thera}{RA\arabic{ra}}
@@ -348,7 +349,7 @@ Seguindo a documentação oficial da Apple \cite{iosaccessibility} e do Google \
 	\renewcommand{\arraystretch}{1.1}
 	\caption{Regras de acessibilidade baseadas nas recomendações de ambas as plataformas}
 	\label{tab:regras-acessibilidade}
-	\begin{tabular}{ R{4cm}  L{10cm} }
+	\begin{tabular}{ R{2.5cm}  L{12cm} }
 		\hline
 		Regra de Acessibilidade & Descrição \\
 		\hline
@@ -362,6 +363,10 @@ Seguindo a documentação oficial da Apple \cite{iosaccessibility} e do Google \
 	\vspace{2mm}
 	\fonte{\me{2024}}
 \end{table}
+
+Para a regra de acessibilidade \ref{ra:feedback-visual}, foi utilizado como base além das documentações oficiais das plataformas o trabalho de \cite[p. 6]{accessibilityinmobileapplicationsforelderyusers} identificou a dificuldade de pessoas idosas em perceber interações em aplicações móveis, e que a falta de feedback visual, auditivo ou tátil para interações do usuário é uma das principais barreiras de acessibilidade para esse público. Com base nisso, foi definido que a regra de acessibilidade \ref{ra:feedback-visual} deve ser seguida por todas as aplicações móveis desenvolvidas com Flutter.
+
+Ademais, \cite{accessibilityinmobileapplicationsforelderyusers} e \cite{studyofaccessibilityguidelinesofmobileapplications} identificaram que a falta de contraste entre o texto e o plano de fundo é uma das principais barreiras de acessibilidade em aplicações móveis, contribuindo com a escolha da regra de acessibilidade \ref{ra:contraste-minimo}. 
 
 Tais regras de acessibilidade serão utilizadas como base para a criação de um conjunto de regras de acessibilidade padrão para aplicações móveis desenvolvidas com Flutter. Elas serão aplicadas ao código fonte da aplicação desenvolvida com Flutter e o plugin irá marcar o código fonte e sugerir correções automáticas caso uma inconsistência seja encontrada.
 
